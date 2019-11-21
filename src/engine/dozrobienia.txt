@@ -1,0 +1,15 @@
+
+ podstawowe:
+- jesli sie zbiło wszystkie cegiełki zaczynamy następny poziom
+- przełączanie poziomów
+- czas rozgrywki ( info wygrałeś poziom w takim czasie)
+- informacja o przegranej gdy piłka spadnie ( pytanie czy chcesz zacząć jeszcze raz )
+
+
+ dodatkowe:
+ - spadające rzeczy z klocków ( nagle pojawiają się 3 piłki, rozszerza się rakieta, przyspieszenie piłki)
+ - sterowanie myszką
+ - różne wytrzymałości klocków ( kilka razy trzeba uderzyć jedną cegiełkę)
+ - różne kształty poziomów
+ - wpływ kierunku i prędkości paletki na piłkę
+ - efekty dźwiękowe
