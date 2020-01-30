@@ -2,74 +2,127 @@ package engine;
 
 import model.Ball;
 import model.Brick;
-import model.Raquet;
-import model.RectFactory;
+import model.GameObject;
+import model.Type;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Gameplay {
 
-    private List<Ball> balls;
-    private List<Brick> bricks;
-    private Raquet raquet;
+    private List<GameObject> objects;
     private KeyboardManager keyboard;
+    private LevelService levelService;
+
 
     public Gameplay(KeyboardManager keyboard) {
+        objects = new CopyOnWriteArrayList<>();
         this.keyboard = keyboard;
-        balls = produceBalls(5, 30);
-        RectFactory factory = new RectFactory();
-        bricks = factory.buildBoard();
-        buildRaquet();
-    }
-
-    private List<Ball> produceBalls(int howManyBalls, int size) {
-        List<Ball> balls = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < howManyBalls; i++) {
-
-            balls.add(new Ball(random.nextInt(Display.getWidth()), 20, size, Color.BLACK));
-        }
-        return balls;
-    }
-
-    private void buildRaquet() {
-        raquet = new Raquet(Color.BLUE, keyboard);
+        this.levelService = new LevelService(this, keyboard);
+        levelService.preparePreLevel();
     }
 
     public void tick() {
+        levelService.tick();
+        if (levelService.stopPlaying()) return;
+        keyboard.tick();
+
+        for (GameObject object : objects) {
+            object.tick();
+
+        }
+
+        //todo osiągnąć kolizje
+
+        removeObjects();
+
+
+        //piłka -> rakietka (1)
+        //piłka -> brick (wiele)
+
+
+     /*   for (Brick brick : bricks) {
+            brick.tick();
+        }
+
+        raquet.tick();
         for (Ball ball : balls) {
             ball.tick();
-            ball.checkColisionWithRect(raquet);
+            ball.doBrickCollision(raquet);
             for (Brick brick : bricks) {
-                ball.checkColisionWithRect(brick);
+                ball.doBrickCollision(brick);
 
             }
-        }
-
-        for (Brick brick : bricks) {
-            brick.tick();
-
-        }
-        keyboard.tick();
-        raquet.tick();
-
+        }*/
     }
 
+    /*
+     * gameplay TICK>
+     * Poruszenie się
+     * Sprawdzenie kolizji
+     * Piłka -> z brick i racket ze ścianą
+     * Racket -> ze ścianą
+     * Special -> z racket, z dolną ścianą
+     * */
+
+
+
+
+
+
+/*private int countTimeSpendInLevel(LocalDateTime endTime){
+     return endTime.compareTo(time);
+}*/
 
     public void render(Graphics graphics) {
-        for (Ball ball : balls) {
+
+        for (GameObject object : objects) {
+            object.render(graphics);
+        }
+        /*for (Ball ball : balls) {
             ball.render(graphics);
         }
 
         for (Brick brick : bricks) {
             brick.render(graphics);
         }
-        raquet.render(graphics);
+        raquet.render(graphics);*/
+    }
+
+    public void removeObjects() {
+        List<GameObject> skopiowaneObiekty = new ArrayList<>(objects);
+        for (GameObject object : skopiowaneObiekty) {
+            if (!object.isInGame()) {
+                objects.remove(object);
+            }
+        }
     }
 
 
+    public void addObjects(List<? extends GameObject> objects) {
+        this.objects.addAll(objects);
+    }
+
+    public int countObjectsByType(Type type) {
+        int licznik = 0;
+        for (GameObject object : objects) {
+            if (object.getType().equals(type)) {
+                licznik++;
+            }
+
+        }
+        return licznik;
+    }
+
+
+    public List<GameObject> getObjects() {
+        return objects;
+    }
+
+    public void removeAll() {
+        objects.clear();
+    }
 }

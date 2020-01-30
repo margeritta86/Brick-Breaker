@@ -1,44 +1,39 @@
 package model;
 
 import engine.Display;
+import engine.Mediator;
 
 import java.awt.*;
 
-public class Brick extends Rect {
+public class Brick extends GameObject {
 
 
+    public static final int DEFAULT_HEIGHT = Display.getHeight() / 16,
+            DEFAULT_WIDTH = Display.getWidth() / 10;
 
-    public static final int DEFAULT_HEIGHT = Display.getHeight()/16,
-                            DEFAULT_WIDTH = Display.getWidth()/10;
-
-    public Brick(int x, int y, int width, int height, Color color) {
-        super(x, y, width, height, color,CollisionType.STANDARD);
+    public Brick(int x, int y, Color color, Mediator mediator) {
+        super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, color, Type.BRICK,mediator);
     }
-
-
-    @Override
-    void reactToCollision() {
-        active = false;
-
-    }
-
-    /*private List deleteBrick(List bricks) {
-        Brick cegla;
-        for (Object brick : bricks) {
-            if(!this.isAcitve()){
-                cegla = this;
-            }
-        }
-        bricks.remove(cegla);
-        return bricks;
-
-    }*/
-
 
     @Override
     public void tick() {
 
+    }
 
+    @Override
+    public void render(Graphics graphics) {
+
+        graphics.setColor(color);
+        graphics.fillRect(x, y, width, height);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(x, y, width, height);
+
+
+    }
+
+    @Override
+    public void reactToHit(GameObject object) {
+        active = false;
     }
 
 }

@@ -31,6 +31,10 @@ public class KeyboardManager implements KeyListener, RaquetController {
 
     }
 
+    public void releaseAllKeys(){
+        keys = new boolean[1000];
+    }
+
     @Override
     public boolean isLeftPressed() {
         return keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
