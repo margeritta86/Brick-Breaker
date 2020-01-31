@@ -47,4 +47,25 @@ public abstract class GameObject {
     public boolean isIntersecting(GameObject other) { //TODO wywalić jesli niepotrzebny przy znajdźkach
         return getBounds().intersects(other.getBounds());
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    //todo przemyśleć ta metode 
+    public void accept(Special special) {
+        special.execute(this);
+    }
 }

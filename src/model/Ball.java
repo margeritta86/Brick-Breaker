@@ -30,6 +30,12 @@ public class Ball extends MovingObject {
         move();
     }
 
+    @Override
+    public void render(Graphics graphics) {
+        graphics.setColor(color);
+        graphics.fillOval(x, y, width, width);
+    }
+
 
     public void correctSpeed() {
         if (speedY >= -0.5 && speedY <= 0.5) {
@@ -186,6 +192,11 @@ public class Ball extends MovingObject {
 
     }
 
+    public void speedUp() {
+        speedY += 2;
+        speedX += 2;
+    }
+
     /*
      * Uniwersalny scheamt kolizji z prostokątem
      * // czy został udeżony -> + zwrócić info
@@ -196,11 +207,7 @@ public class Ball extends MovingObject {
      * */
 
 
-    @Override
-    public void render(Graphics graphics) {
-        graphics.setColor(color);
-        graphics.fillOval(x, y, width, width);
-    }
+
 
 
 }

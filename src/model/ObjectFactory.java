@@ -37,7 +37,7 @@ public class ObjectFactory {
 
     public List<Brick> buildTestLevel() {
         List<Brick> board = new ArrayList<>();
-        board.add(new Brick(Display.getWidth() / 2, 100, chooseRandomColor(),mediator));
+        board.add(new Brick(Display.getWidth() / 2, 100, chooseRandomColor(), mediator));
         return board;
 
     }
@@ -84,7 +84,7 @@ public class ObjectFactory {
         List<Brick> row = new ArrayList<>();
         for (int i = firstBrick; i < lastBrick; i++) {
             row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
-                    chooseColorFromList(),mediator));
+                    chooseColorFromList(), mediator));
 
         }
         return row;
@@ -96,7 +96,7 @@ public class ObjectFactory {
         Random random = new Random();
         for (int i = 0; i < howManyBalls; i++) {
 
-            balls.add(new Ball(random.nextInt(Display.getWidth()), 20, size, Color.BLACK,mediator));
+            balls.add(new Ball(random.nextInt(Display.getWidth()), 20, size, Color.BLACK, mediator));
         }
         return balls;
     }
@@ -110,5 +110,10 @@ public class ObjectFactory {
         Random random = new Random();
         return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
+    }
+
+    public Special buildTestSpecial() {
+
+        return new Special(400, 400, SpecialType.HAND_BALL, mediator);
     }
 }

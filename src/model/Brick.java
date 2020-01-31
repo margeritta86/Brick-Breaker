@@ -33,7 +33,11 @@ public class Brick extends GameObject {
 
     @Override
     public void reactToHit(GameObject object) {
+
         active = false;
+        mediator.spawnSpecial(this);
     }
+
+
 
 }

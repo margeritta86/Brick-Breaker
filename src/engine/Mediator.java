@@ -1,8 +1,8 @@
 package engine;
 
-import model.Ball;
-import model.GameObject;
-import model.Type;
+import model.*;
+
+import java.util.Optional;
 
 public class Mediator {
 
@@ -14,7 +14,7 @@ public class Mediator {
 
     public void executeBallCollisions(Ball ball) {
         for (GameObject gameObject : gameplay.getObjects()) {
-            if ( gameObject.getType() == Type.BALL) {
+            if (gameObject.getType() == Type.BALL) {
                 continue;
             }
             boolean wasHit = ball.doBrickCollision(gameObject);
@@ -22,6 +22,25 @@ public class Mediator {
 
                 gameObject.reactToHit(ball);
             }
+        }
+    }
+
+
+    public void spawnSpecial(Brick brick) {
+
+        SpecialFactory specialFactory = new SpecialFactory();
+        Optional<Special> special = specialFactory.produceSpecial(brick, this);
+        if (special.isPresent()) {
+            gameplay.addObject(special.get());
+        }
+    }
+
+    public void executeRaquetCollision(Special special) {
+        for (GameObject gameObject : gameplay.getObjects()) {
+            if (gameObject.getType() == Type.SPECIAL) {
+                continue;
+            }
+           special.doRaquetColision(gameObject);
         }
     }
 }

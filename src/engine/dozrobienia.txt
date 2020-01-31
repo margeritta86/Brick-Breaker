@@ -15,3 +15,31 @@
  - różne kształty poziomów
  - efekty dźwiękowe
  - ranking ( podaj imie , czy chcesz sie dopisac do rankingu)
+
+
+
+ SPECIAL:
+ Mediator - zrobić metode przekazujaca bricka -> metoda spawn z factory od speciali, ktora przygotowuje special
+ jak wytworzxyła special przekazujemy go do gameplay
+ Brick znika ->
+
+   SPEED_BALL(Color.BLUE, DEFAULT_TIME),
+     WIDER_RAQUET(Color.RED, DEFAULT_TIME),
+     NARROWER_RAQUET(Color.ORANGE, DEFAULT_TIME),
+     THREE_BALLS(Color.YELLOW, DEFAULT_TIME),
+     HAND_BALL(Color.PINK, DEFAULT_TIME),
+     LEVELUP(Color.GREEN, DEFAULT_TIME),
+     SLOWDOWN_BALL(Color.CYAN, DEFAULT_TIME);
+
+     // GameObject.reactTo(Special s){
+     s.execute(this);
+     }
+
+
+
+     // execute(ball){
+            ball.setSize(ball.getSize+10);
+
+     }
+
+

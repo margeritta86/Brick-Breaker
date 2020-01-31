@@ -83,7 +83,9 @@ public class LevelService {
         List<GameObject> objects = new ArrayList<>();
         objects.addAll(factory.produceBalls(5, 30));
         objects.add(new Raquet(keyboard,mediator));
+      //  objects.add(factory.buildTestSpecial());
         gameplay.addObjects(objects);
+
     }
 
     private synchronized void buildLevel() {

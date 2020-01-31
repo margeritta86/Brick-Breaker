@@ -1,9 +1,6 @@
 package engine;
 
-import model.Ball;
-import model.Brick;
-import model.GameObject;
-import model.Type;
+import model.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,6 +20,7 @@ public class Gameplay {
         this.keyboard = keyboard;
         this.levelService = new LevelService(this, keyboard);
         levelService.preparePreLevel();
+
     }
 
     public void tick() {
@@ -104,6 +102,10 @@ public class Gameplay {
 
     public void addObjects(List<? extends GameObject> objects) {
         this.objects.addAll(objects);
+    }
+
+    public void addObject(GameObject object) {
+        this.objects.add(object);
     }
 
     public int countObjectsByType(Type type) {
