@@ -17,8 +17,8 @@ public class SpecialFactory {
         if(result>SPAWN_CHANCE){
             return Optional.empty();
         }
-        return Optional.of(new Special(brick.getX()+brick.getWidth()/2,
+        return Optional.of(new SpeedBallSpecial(brick.getX()+brick.getWidth()/2,
                 brick.getY()+brick.getHeight()/2,
-                SpecialType.HAND_BALL,mediator));
+                mediator));
     }
 }

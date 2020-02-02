@@ -38,6 +38,10 @@ public class Brick extends GameObject {
         mediator.spawnSpecial(this);
     }
 
+    @Override
+    public void accept(Special special) {
+
+    }
 
 
 }

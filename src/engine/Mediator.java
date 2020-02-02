@@ -40,7 +40,7 @@ public class Mediator {
             if (gameObject.getType() == Type.SPECIAL) {
                 continue;
             }
-           special.doRaquetColision(gameObject);
+           special.accept(special);
         }
     }
 }

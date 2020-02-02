@@ -197,6 +197,10 @@ public class Ball extends MovingObject {
         speedX += 2;
     }
 
+    public void accept(Special special) {
+        special.execute(this);
+    }
+
     /*
      * Uniwersalny scheamt kolizji z prostokątem
      * // czy został udeżony -> + zwrócić info

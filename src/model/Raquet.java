@@ -44,6 +44,11 @@ public class Raquet extends MovingObject {
 
     }
 
+    @Override
+    public void accept(Special special) {
+
+    }
+
     private void move() {
 
         if (controller.isRIghtPressed()) {

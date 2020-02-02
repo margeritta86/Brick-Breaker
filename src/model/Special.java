@@ -39,41 +39,42 @@ public abstract class Special extends MovingObject {
 
     @Override
     public void reactToHit(GameObject object) {
-
     }
 
-    public abstract void doRaquetColision(Ball ball);
-    public abstract void doRaquetColision(Brick brick);
-    public abstract void doRaquetColision(Raquet raquet);
-    public abstract void doRaquetColision(GameObject object);}
+    public void accept(Special special){
+    }
+
+    public abstract void execute(Ball ball);
+    public abstract void execute(Brick brick);
+    public abstract void execute(Raquet raquet);
+
+    public  void activated(){
+        active = false;
+    }
+}
 
 class SpeedBallSpecial extends Special{
 
-    public SpeedBallSpecial(int x, int y,  Mediator mediator) {
+    public SpeedBallSpecial(int x, int y, Mediator mediator) {
         super(x, y, SpecialType.SPEED_BALL, mediator);
     }
+    @Override
+    public void execute(Brick brick) {
 
+    }
 
     @Override
-    public void doRaquetColision(Ball ball) {
+    public void execute(Raquet raquet) {
+
+    }
+
+    @Override
+    public void execute(Ball ball) {
+        activated();
         ball.speedUp();
         System.out.println("SUKCES!");
     }
 
-    @Override
-    public void doRaquetColision(Brick brick) {
-
-    }
-
-    @Override
-    public void doRaquetColision(Raquet raquet) {
-
-    }
-
-    @Override
-    public void doRaquetColision(GameObject object) {
-
-    }
 }
 
 

@@ -64,8 +64,6 @@ public abstract class GameObject {
         return height;
     }
 
-    //todo przemyśleć ta metode 
-    public void accept(Special special) {
-        special.execute(this);
-    }
+    //todo przemyśleć ta metode
+    public abstract void accept(Special special);
 }

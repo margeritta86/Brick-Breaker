@@ -114,6 +114,6 @@ public class ObjectFactory {
 
     public Special buildTestSpecial() {
 
-        return new Special(400, 400, SpecialType.HAND_BALL, mediator);
+        return new SpeedBallSpecial(400, 400, mediator);
     }
 }
