@@ -14,8 +14,8 @@ public class Ball extends MovingObject {
     //private double speedX = random.nextDouble()*5+3;
     //private double speedY =  random.nextDouble()*5+3;
 
-    public Ball(int x, int y, int width, Color color,Mediator mediator) {
-        super(x, y, width, width, randomSpeed(), randomSpeed(), color, Type.BALL,mediator);
+    public Ball(int x, int y, int width, Color color, Mediator mediator) {
+        super(x, y, width, width, randomSpeed(), randomSpeed(), color, Type.BALL, mediator);
     }
 
     private static double randomSpeed() {
@@ -192,13 +192,36 @@ public class Ball extends MovingObject {
 
     }
 
-    public void speedUp() {
-        speedY += 2;
-        speedX += 2;
+    public void speedUp(int modificator) {
+
+        if (speedY < 0) {
+            speedY -= modificator;
+        } else {
+            speedY += modificator;
+        }
+        if (speedX < 0) {
+            speedX -= modificator;
+        } else {
+            speedX += modificator;
+        }
     }
 
     public void accept(Special special) {
         special.execute(this);
+    }
+
+    public void speedDown(int modificator) {
+        if (speedY < 0) {
+            speedY += modificator;
+        } else {
+            speedY -= modificator;
+        }
+        if (speedX < 0) {
+            speedX += modificator;
+        } else {
+            speedX -= modificator;
+        }
+
     }
 
     /*
@@ -209,9 +232,6 @@ public class Ball extends MovingObject {
      * // zwrócenie informacji czy udeżony
 
      * */
-
-
-
 
 
 }

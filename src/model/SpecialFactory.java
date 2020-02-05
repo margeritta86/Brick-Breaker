@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class SpecialFactory {
 
-    final static int DEFAULT_TIME = 5;
+    final static int DEFAULT_TIME = 3;
     private final static double SPAWN_CHANCE = 0.20;
     private Random random = new Random();
 

@@ -20,7 +20,6 @@ public class Gameplay {
         this.keyboard = keyboard;
         this.levelService = new LevelService(this, keyboard);
         levelService.preparePreLevel();
-
     }
 
     public void tick() {
@@ -30,64 +29,15 @@ public class Gameplay {
 
         for (GameObject object : objects) {
             object.tick();
-
         }
-
-        //todo osiągnąć kolizje
-
         removeObjects();
-
-
-        //piłka -> rakietka (1)
-        //piłka -> brick (wiele)
-
-
-     /*   for (Brick brick : bricks) {
-            brick.tick();
-        }
-
-        raquet.tick();
-        for (Ball ball : balls) {
-            ball.tick();
-            ball.doBrickCollision(raquet);
-            for (Brick brick : bricks) {
-                ball.doBrickCollision(brick);
-
-            }
-        }*/
     }
-
-    /*
-     * gameplay TICK>
-     * Poruszenie się
-     * Sprawdzenie kolizji
-     * Piłka -> z brick i racket ze ścianą
-     * Racket -> ze ścianą
-     * Special -> z racket, z dolną ścianą
-     * */
-
-
-
-
-
-
-/*private int countTimeSpendInLevel(LocalDateTime endTime){
-     return endTime.compareTo(time);
-}*/
 
     public void render(Graphics graphics) {
 
         for (GameObject object : objects) {
             object.render(graphics);
         }
-        /*for (Ball ball : balls) {
-            ball.render(graphics);
-        }
-
-        for (Brick brick : bricks) {
-            brick.render(graphics);
-        }
-        raquet.render(graphics);*/
     }
 
     public void removeObjects() {
@@ -98,7 +48,6 @@ public class Gameplay {
             }
         }
     }
-
 
     public void addObjects(List<? extends GameObject> objects) {
         this.objects.addAll(objects);
@@ -114,11 +63,9 @@ public class Gameplay {
             if (object.getType().equals(type)) {
                 licznik++;
             }
-
         }
         return licznik;
     }
-
 
     public List<GameObject> getObjects() {
         return objects;

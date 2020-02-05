@@ -2,14 +2,15 @@ package engine;
 
 import model.*;
 
-import java.util.Optional;
-
+//komunikuje obiekty majace interkacje
 public class Mediator {
 
     private Gameplay gameplay;
+    private SpecialManager specialManager;
 
     public Mediator(Gameplay gameplay) {
         this.gameplay = gameplay;
+        specialManager = new SpecialManager(gameplay, this);
     }
 
     public void executeBallCollisions(Ball ball) {
@@ -19,28 +20,17 @@ public class Mediator {
             }
             boolean wasHit = ball.doBrickCollision(gameObject);
             if (wasHit) {
-
                 gameObject.reactToHit(ball);
             }
         }
     }
 
 
-    public void spawnSpecial(Brick brick) {
-
-        SpecialFactory specialFactory = new SpecialFactory();
-        Optional<Special> special = specialFactory.produceSpecial(brick, this);
-        if (special.isPresent()) {
-            gameplay.addObject(special.get());
-        }
+    public void executeRaquetCollision(Special special) {
+        specialManager.executeRaquetCollision(special);
     }
 
-    public void executeRaquetCollision(Special special) {
-        for (GameObject gameObject : gameplay.getObjects()) {
-            if (gameObject.getType() == Type.SPECIAL) {
-                continue;
-            }
-           special.accept(special);
-        }
+    public void spawnSpecial(Brick brick) {
+        specialManager.spawnSpecial(brick);
     }
 }
