@@ -28,7 +28,6 @@ public class Brick extends GameObject {
         graphics.setColor(Color.BLACK);
         graphics.drawRect(x, y, width, height);
 
-
     }
 
     @Override
@@ -43,5 +42,8 @@ public class Brick extends GameObject {
 
     }
 
-
+    @Override
+    public boolean isFrozen() {
+        return true;
+    }
 }

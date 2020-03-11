@@ -1,11 +1,11 @@
 package engine;
 
-import model.RaquetController;
+import model.ControllerStatus;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyboardManager implements KeyListener, RaquetController {
+public class KeyboardManager implements KeyListener, ControllerStatus {
 
     private boolean[] keys = new boolean[1000];
 
@@ -20,15 +20,12 @@ public class KeyboardManager implements KeyListener, RaquetController {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
         keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
         keys[e.getKeyCode()] = false;
-
     }
 
     public void releaseAllKeys(){
@@ -44,4 +41,8 @@ public class KeyboardManager implements KeyListener, RaquetController {
     public boolean isRIghtPressed() {
         return keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
     }
+
+    @Override
+    public boolean isSpacePressed() { return keys[KeyEvent.VK_SPACE]; }
+
 }

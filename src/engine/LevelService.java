@@ -21,7 +21,7 @@ public class LevelService {
     private boolean powtorzPoziom;
     private boolean menuActive;
     LocalDateTime time;
-    private int levelNumber = 2;
+    private int levelNumber = 1;
     private Mediator mediator;
     private ObjectFactory factory;
 
@@ -56,7 +56,6 @@ public class LevelService {
                 levelLoose();
                 break;
         }
-
     }
 
     public boolean stopPlaying() {
@@ -66,7 +65,6 @@ public class LevelService {
     public void preparePreLevel() {
         prepareStage();
         buildLevel();
-
     }
 
     private synchronized void prepareStage() {
@@ -81,7 +79,7 @@ public class LevelService {
     private void prepareStartingObjects() {
         gameplay.removeAll();
         List<GameObject> objects = new ArrayList<>();
-        objects.addAll(factory.produceBalls(5, 30));
+        objects.addAll(factory.produceBalls(5));
         objects.add(new Raquet(keyboard,mediator));
       //  objects.add(factory.buildTestSpecial());
         gameplay.addObjects(objects);
@@ -108,7 +106,7 @@ public class LevelService {
             @Override
             public void run() {
 
-                int answer = JOptionPane.showConfirmDialog(null, "Poziom zakończony w czasie:" + time.until(LocalDateTime.now(), ChronoUnit.SECONDS) + " sekund \nCzy chcesz zagrać w kolejny level?");
+                int answer = JOptionPane.showConfirmDialog(null, "Poziom zakończony w czasie: " + time.until(LocalDateTime.now(), ChronoUnit.SECONDS) + " sekund \nCzy chcesz zagrać w kolejny level?");
                 if (answer == JOptionPane.OK_OPTION) {
                     LevelService.this.prepareStage();
                     LevelService.this.buildNextLevel();
@@ -148,7 +146,13 @@ public class LevelService {
         return gameplay.countObjectsByType(Type.BRICK) == 0;
     }
 
+    public State getState() {
+        return state;
+    }
 
+    public void setState(State state) {
+        this.state = state;
+    }
 }
 
 enum State {

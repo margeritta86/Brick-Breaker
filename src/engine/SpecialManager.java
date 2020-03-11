@@ -25,14 +25,15 @@ public class SpecialManager implements ActionListener {
     }
 
     public void spawnSpecial(Brick brick) {
-        SpecialFactory specialFactory = new SpecialFactory();
-        Optional<Special> special = specialFactory.produceSpecial(brick, mediator);
+        SpecialFactory specialFactory = new SpecialFactory(mediator);
+        Optional<Special> special = specialFactory.produceSpecial(brick);
         if (special.isPresent()) {
             gameplay.addObject(special.get());
         }
     }
 
     private void executeSpecial(Special special) {
+        special.execute();
         for (GameObject gameObject : gameplay.getObjects()) {
             gameObject.accept(special);
         }
@@ -66,8 +67,14 @@ public class SpecialManager implements ActionListener {
             }
         }
         activatedSpecials.removeAll(toRemove);
-
-
     }
 
 }
+
+//w tej chwili dodajemy czas do speciali i jeśli minie ich duration to są usuwane przez ponowne wywołanie execute które
+//dostosowuje sie do tego czy ten special był juz wczesniej wywoałny
+
+//zamiast tego chcemy scenariusz: stary special ma sie wylaczyc ale nowy aktywowany gdy już wcześniej aktywny był ten sam tego typu
+// powinien być aktywowany osobna metoda execute again która zadecyude czy dodajemy dodatkowy (hand ball) czas czy wywolujemy ponownie efekt (add balls)
+
+//ewentualnie zerowy czas dla tych które maja sie ponownie aktywowac zamiast zwiekszac czasu

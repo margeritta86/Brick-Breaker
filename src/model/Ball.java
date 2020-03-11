@@ -9,13 +9,13 @@ import java.util.Random;
 public class Ball extends MovingObject {
 
     private static Random random = new Random();
+    private static final int SIZE = 30;
+    private BallRaquetCollision collision = new BallRaquetCollisionStandard(this);
+    protected boolean stickedBall = false;
 
 
-    //private double speedX = random.nextDouble()*5+3;
-    //private double speedY =  random.nextDouble()*5+3;
-
-    public Ball(int x, int y, int width, Color color, Mediator mediator) {
-        super(x, y, width, width, randomSpeed(), randomSpeed(), color, Type.BALL, mediator);
+    public Ball(int x, int y, Color color, Mediator mediator) {
+        super(x, y, SIZE, SIZE, randomSpeed(), randomSpeed(), color, Type.BALL, mediator);
     }
 
     private static double randomSpeed() {
@@ -65,13 +65,15 @@ public class Ball extends MovingObject {
     }
 
     private void move() {
-        x += Math.round(speedX);
-        y += Math.round(speedY);
+        if (!stickedBall) {
+            x += Math.round(speedX);
+            y += Math.round(speedY);
+        }
     }
 
 
+    //brak ruchu
     public boolean doBrickCollision(GameObject obstacle) {
-
         Rectangle bounds = obstacle.getBounds();
         boolean wasHit = true;
 
@@ -101,6 +103,7 @@ public class Ball extends MovingObject {
 
     }
 
+    //zmiana na przyklejanie
     private void executeTopCollision(GameObject obstacle) {
         Rectangle bounds = obstacle.getBounds();
         if (obstacle.getType() == Type.RAQUET) {
@@ -108,7 +111,6 @@ public class Ball extends MovingObject {
         } else {
             executeSimpleTopCollision(bounds);
         }
-
     }
 
     private void executeSimpleTopCollision(Rectangle bounds) {
@@ -157,39 +159,7 @@ public class Ball extends MovingObject {
 
 
     public void executeRaquetCollision(Rectangle bounds) {
-
-        int ballCenter = x + width / 2;
-        int ballHit = ballCenter - bounds.x;
-
-        double result = (double) ballHit / bounds.width;
-        boolean right = false;
-        if (result > 0.5) {
-            result -= 0.5;
-            right = true;
-        }
-        result *= 2;
-
-        if (right) {
-
-            speedX = Math.abs(speedX);
-            double totalSpeed = speedX + speedY;
-            speedX = result * totalSpeed;
-            speedY = totalSpeed - speedX;
-            speedX = Math.abs(speedX);
-
-        } else {
-            speedX = Math.abs(speedX);
-            double totalSpeed = speedX + speedY;
-            speedY = result * totalSpeed;
-            speedX = totalSpeed - speedY;
-            speedX = -speedX;
-
-
-        }
-        speedY = -speedY;
-        y = (int) bounds.getY() - width;
-
-
+        collision.executeRaquetCollision(bounds);
     }
 
     public void speedUp(int modificator) {
@@ -210,6 +180,21 @@ public class Ball extends MovingObject {
         special.execute(this);
     }
 
+    public void slowDown(int modificator) {
+
+        if (speedY < 0) {
+            speedY += modificator;
+        } else {
+            speedY -= modificator;
+        }
+        if (speedX < 0) {
+            speedX += modificator;
+        } else {
+            speedX -= modificator;
+        }
+    }
+
+
     public void speedDown(int modificator) {
         if (speedY < 0) {
             speedY += modificator;
@@ -224,14 +209,16 @@ public class Ball extends MovingObject {
 
     }
 
-    /*
-     * Uniwersalny scheamt kolizji z prostokątem
-     * // czy został udeżony -> + zwrócić info
-     * // z której strony
-     * // jak reagujemy na udeżenie z danej strony (specjalna reakcja na paletkę na hit z gory )
-     * // zwrócenie informacji czy udeżony
+    public void setStickedBall(boolean stickedBall) {
+        this.stickedBall = stickedBall;
+    }
 
-     * */
+    public void setCollision(BallRaquetCollision collision) {
+        this.collision = collision;
+    }
 
-
+    @Override
+    public boolean isFrozen() {
+        return stickedBall;
+    }
 }

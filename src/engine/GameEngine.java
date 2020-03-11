@@ -23,10 +23,7 @@ public class GameEngine implements Runnable {
         keyboard = new KeyboardManager();
         display.addKeyManager(keyboard);
         gameplay = new Gameplay(keyboard);
-
-
     }
-
 
     @Override
     public void run() {
@@ -56,7 +53,6 @@ public class GameEngine implements Runnable {
                 timer = 0;
             }
         }
-
         stop();
     }
 

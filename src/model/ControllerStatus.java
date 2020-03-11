@@ -1,9 +1,10 @@
 package model;
 
-public interface RaquetController {
+public interface ControllerStatus {
 
     boolean isLeftPressed();
     boolean isRIghtPressed();
+    boolean isSpacePressed();
 
 
 

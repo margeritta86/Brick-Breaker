@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+//istnieje więcej niż jeden object factory
 
 public class ObjectFactory {
     private List<Color> colorList = new ArrayList<>();
@@ -56,9 +57,10 @@ public class ObjectFactory {
     }
 
     public List<Brick> buildLevelNr2() {
-        List<Brick> board = new ArrayList<>();
         colorList.add(Color.BLUE);
         colorList.add(Color.WHITE);
+
+        List<Brick> board = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
             board.addAll(buildRow(i, i, 10 - i));
 
@@ -85,21 +87,30 @@ public class ObjectFactory {
         for (int i = firstBrick; i < lastBrick; i++) {
             row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
                     chooseColorFromList(), mediator));
-
         }
         return row;
-
     }
 
-    public java.util.List<Ball> produceBalls(int howManyBalls, int size) {
+    public java.util.List<Ball> produceBalls(int howManyBalls) {
         List<Ball> balls = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < howManyBalls; i++) {
 
-            balls.add(new Ball(random.nextInt(Display.getWidth()), 20, size, Color.BLACK, mediator));
+            balls.add(new Ball(random.nextInt(Display.getWidth()), 20, Color.BLACK, mediator));
         }
         return balls;
     }
+
+   public java.util.List<Ball> produceBalls(int howManyBalls, Ball ball) {
+        List<Ball> balls = new ArrayList<>();
+
+        for (int i = 0; i < howManyBalls; i++) {
+
+            balls.add(new Ball(ball.getX(), ball.getY(), Color.BLACK, mediator));
+        }
+        return balls;
+    }
+
 
     private Color chooseColorFromList() {
         Random random = new Random();
@@ -112,8 +123,8 @@ public class ObjectFactory {
 
     }
 
-    public Special buildTestSpecial() {
+    /*public Special buildTestSpecial() {
 
         return new SpeedBallSpecial(400, 400, mediator);
-    }
+    }*/
 }

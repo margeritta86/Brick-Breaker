@@ -3,6 +3,7 @@ package engine;
 import model.*;
 
 //komunikuje obiekty majace interkacje
+
 public class Mediator {
 
     private Gameplay gameplay;
@@ -25,6 +26,14 @@ public class Mediator {
         }
     }
 
+    public void doubleBall(Ball ball) {
+        ObjectFactory objectFactory = new ObjectFactory(this);
+        gameplay.addObjects(objectFactory.produceBalls(2, ball));
+    }
+
+    public void wonLevel(){
+        gameplay.getLevelService().setState(State.WIN);
+    }
 
     public void executeRaquetCollision(Special special) {
         specialManager.executeRaquetCollision(special);
@@ -33,4 +42,6 @@ public class Mediator {
     public void spawnSpecial(Brick brick) {
         specialManager.spawnSpecial(brick);
     }
+
+
 }

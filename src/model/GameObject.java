@@ -44,7 +44,7 @@ public abstract class GameObject {
 
     public abstract void reactToHit(GameObject object);
 
-    public boolean isIntersecting(GameObject other) { //TODO wywalić jesli niepotrzebny przy znajdźkach
+    public boolean isIntersecting(GameObject other) {
         return getBounds().intersects(other.getBounds());
     }
 
@@ -66,4 +66,7 @@ public abstract class GameObject {
 
     //todo przemyśleć ta metode
     public abstract void accept(Special special);
+
+    public abstract boolean isFrozen();
+
 }

@@ -74,4 +74,8 @@ public class Gameplay {
     public void removeAll() {
         objects.clear();
     }
+
+    public LevelService getLevelService() {
+        return levelService;
+    }
 }
