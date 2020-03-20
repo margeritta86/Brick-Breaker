@@ -1,12 +1,29 @@
 
 
-import engine.GameEngine;
+import game.engine.GameViewController;
+import view.MenuView;
+import view.ViewFactory;
+import view.ViewType;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Launcher {
     public static void main(String[] args) {
-        GameEngine game = new GameEngine("Odbijanie",new Dimension(1200,800));
-        game.start();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                runApplication();
+            }
+        });
+
+       // GameViewController game = new GameViewController("Odbijanie");
+      //  game.start();
+    }
+
+    private static void runApplication(){
+        ViewFactory factory = new ViewFactory();
+        factory.showView(ViewType.MENU);
     }
 }
