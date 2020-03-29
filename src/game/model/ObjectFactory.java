@@ -70,9 +70,14 @@ public class ObjectFactory {
         colorList.add(Color.WHITE);
 
         List<Brick> board = new ArrayList<>();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 10; i++) {
             board.addAll(buildRegularRow(i, i, 19 - i));
         }
+        for (int i = 10; i > 1; i--) {
+            board.addAll(buildRegularTriangleRow(i, i, 1+i));
+        }
+
+
         colorList.clear();
         return board;
     }
@@ -116,6 +121,17 @@ public class ObjectFactory {
         return row;
     }
 
+    private List<Brick> buildRegularTriangleRow(int numberOfRow, int firstBrick, int lastBrick) {
+        List<Brick> row = new ArrayList<>();
+        for(int j = )
+        for (int i = numberOfRow; i < lastBrick; i++) {
+            row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
+                    chooseColorFromList(), mediator));
+        }
+        return row;
+    }
+
+
     private List<Brick> buildUnregularRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
         for (int i = firstBrick; i < lastBrick;i++) {
@@ -126,8 +142,6 @@ public class ObjectFactory {
         }
         return row;
     }
-
-
 
     private List<Brick> buildRowOfSolidBricks(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
@@ -148,10 +162,6 @@ public class ObjectFactory {
         }
         return row;
     }
-
-
-
-
 
     public List<GameObject> produceBallsAndRaquet(KeyboardManager keyboardManager) {
         List<GameObject> objects = new ArrayList<>(produceBalls(BALLS_INITIAL_QUANTITY));

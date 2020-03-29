@@ -16,7 +16,7 @@ public class LevelService {
     private State state;
     private boolean menuActive;
     private LocalDateTime time;
-    private int levelNumber = 4;
+    private int levelNumber = 2;
 
     public LevelService(Gameplay gameplay, KeyboardManager keyboard) {
         this.gameplay = gameplay;
