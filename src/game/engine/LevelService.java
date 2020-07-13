@@ -1,9 +1,14 @@
 package game.engine;
 
 import game.model.*;
+import game.model.player.Player;
+import game.model.ui.ScoreCounter;
+
 import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 import static game.engine.State.*;
 
 public class LevelService {
@@ -12,6 +17,8 @@ public class LevelService {
     private KeyboardManager keyboard;
     private ObjectFactory factory;
     private Mediator mediator;
+    private Player player;
+    private ScoreCounter scoreCounter;
 
     private State state;
     private boolean menuActive;
@@ -21,7 +28,9 @@ public class LevelService {
     public LevelService(Gameplay gameplay, KeyboardManager keyboard) {
         this.gameplay = gameplay;
         this.keyboard = keyboard;
-        mediator = new Mediator(gameplay);
+        player = new Player();
+        scoreCounter = new ScoreCounter(player);
+        mediator = new Mediator(gameplay,player);
         factory = new ObjectFactory(mediator);
         state = PLAY;
 
@@ -59,6 +68,10 @@ public class LevelService {
         handleLevelEnding();
     }
 
+    public void render(Graphics graphics){
+        scoreCounter.render(graphics);
+    }
+
     private void handleLevelEnding() {
         updateEndState();
         if (isGameEnded()) {
@@ -83,7 +96,7 @@ public class LevelService {
     }
 
     private boolean isGameEnded() {
-        return !menuActive && state!= PLAY;
+        return !menuActive && state != PLAY;
     }
 
     private void endLevel() {
@@ -92,7 +105,9 @@ public class LevelService {
                 levelWon();
                 break;
             case LOOSE:
-                levelLoose();
+                menuActive = true;
+                saveScores();
+                levelRepeat();
                 break;
         }
     }
@@ -108,6 +123,7 @@ public class LevelService {
                 if (answer == JOptionPane.OK_OPTION) {
                     LevelService.this.prepareStage();
                     LevelService.this.buildNextLevel();
+                    player.growLastLevelScore();
 
                 } else {
                     System.exit(0);
@@ -121,8 +137,18 @@ public class LevelService {
         gameplay.addObjects(factory.buildBoard(++levelNumber));
     }
 
-    private void levelLoose() {
-        menuActive = true;
+    private void saveScores() {
+
+        String name = JOptionPane.showInputDialog("Otrzymałeś: "+ player.getScores() + " punktów. Wpisz swoje imię, aby dopisac Cię do rankingu:");
+        if (name != null && !name.isEmpty()) {
+            player.setName(name);
+        }
+
+    }
+
+
+    private void levelRepeat() {
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -130,6 +156,7 @@ public class LevelService {
                 if (answer == JOptionPane.OK_OPTION) {
                     LevelService.this.prepareStage();
                     LevelService.this.buildLevel();
+                    player.reverseToLastLevelScore();
                 } else {
                     System.exit(0);
                 }

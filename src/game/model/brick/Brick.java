@@ -8,7 +8,7 @@ import game.model.Type;
 
 import java.awt.*;
 
-public class Brick extends GameObject {
+public abstract class Brick extends GameObject {
 
 
     public static final int DEFAULT_HEIGHT = GameView.HEIGHT / 32,
@@ -18,11 +18,6 @@ public class Brick extends GameObject {
     public Brick(int x, int y, Color color, Mediator mediator) {
         super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, color, Type.BRICK, mediator);
 
-    }
-
-
-    public Brick(int x, int y,Type type, Mediator mediator) {
-        super(x, y,DEFAULT_WIDTH,DEFAULT_HEIGHT,type, mediator);
     }
 
     @Override
@@ -40,10 +35,7 @@ public class Brick extends GameObject {
     }
 
     @Override
-    public void reactToHit(GameObject object) {
-        active = false;
-        mediator.spawnSpecial(this);
-    }
+    public abstract void reactToHit(GameObject object);
 
     @Override
     public void accept(Special special) {
@@ -53,5 +45,11 @@ public class Brick extends GameObject {
     @Override
     public boolean isFrozen() {
         return true;
+    }
+
+    void brickDestroyed() {
+        active = false;
+        mediator.spawnSpecial(this);
+        mediator.incrementPlayerScore();
     }
 }

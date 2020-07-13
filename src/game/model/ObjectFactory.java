@@ -1,5 +1,6 @@
 package game.model;
 
+import game.model.brick.BrickStandard;
 import view.GameView;
 import game.engine.KeyboardManager;
 import game.engine.Mediator;
@@ -48,7 +49,7 @@ public class ObjectFactory {
 
     private List<Brick> buildTestLevel() {
         List<Brick> board = new ArrayList<>();
-        board.add(new Brick(GameView.WIDTH / 2, 100, chooseRandomColor(), mediator));
+        board.add(new BrickStandard(GameView.WIDTH / 2, 100, chooseRandomColor(), mediator));
         return board;
 
     }
@@ -115,7 +116,7 @@ public class ObjectFactory {
     private List<Brick> buildRegularRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
         for (int i = firstBrick; i < lastBrick; i++) {
-            row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
+            row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
                     chooseColorFromList(), mediator));
         }
         return row;
@@ -123,9 +124,10 @@ public class ObjectFactory {
 
     private List<Brick> buildRegularTriangleRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
-        for(int j = )
+       //for(int j = )
+        //TODO tutaj skończyła się edycja
         for (int i = numberOfRow; i < lastBrick; i++) {
-            row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
+            row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
                     chooseColorFromList(), mediator));
         }
         return row;
@@ -135,7 +137,7 @@ public class ObjectFactory {
     private List<Brick> buildUnregularRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
         for (int i = firstBrick; i < lastBrick;i++) {
-            row.add(new Brick(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
+            row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
                     chooseColorFromList(), mediator));
             i++;
             row.add(new BrickSolid(i*Brick.DEFAULT_WIDTH,Brick.DEFAULT_HEIGHT*numberOfRow,mediator));

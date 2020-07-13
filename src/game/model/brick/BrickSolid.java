@@ -20,12 +20,13 @@ public class BrickSolid extends Brick {
     @Override
     public void reactToHit(GameObject object) {
         if (counter >= 1) {
-            active = false;
-            mediator.spawnSpecial(this);
+            brickDestroyed();
         }
-        this.setColor(Color.BLUE);
+        setColor(Color.BLUE);
         counter++;
 
     }
+
+
 
 }

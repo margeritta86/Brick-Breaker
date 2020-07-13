@@ -21,6 +21,7 @@ public class Gameplay {
 
     public void tick() {
         levelService.tick();
+
         if (levelService.isPlaying()) return;
 
         for (GameObject object : objects) {
@@ -42,6 +43,7 @@ public class Gameplay {
         for (GameObject object : objects) {
             object.render(graphics);
         }
+        levelService.render(graphics);
     }
 
     public void addObjects(List<? extends GameObject> objects) {

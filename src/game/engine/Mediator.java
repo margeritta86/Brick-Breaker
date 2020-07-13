@@ -3,6 +3,7 @@ package game.engine;
 import game.model.*;
 import game.model.ball.Ball;
 import game.model.brick.Brick;
+import game.model.player.Player;
 import game.model.special.Special;
 
 //komunikuje obiekty majace interkacje
@@ -11,10 +12,12 @@ public class Mediator {
 
     private Gameplay gameplay;
     private SpecialManager specialManager;
+    private Player player;
 
-    public Mediator(Gameplay gameplay) {
+    public Mediator(Gameplay gameplay, Player player) {
         this.gameplay = gameplay;
         specialManager = new SpecialManager(gameplay, this);
+        this.player = player;
     }
 
     public void executeBrickBallCollision(Ball ball) {
@@ -47,4 +50,7 @@ public class Mediator {
     }
 
 
+    public void incrementPlayerScore() {
+        player.incrementScore();
+    }
 }
