@@ -11,9 +11,8 @@ public enum SpecialType {
     NARROWER_RAQUET(Color.ORANGE, DEFAULT_TIME,0.90),
     DOUBLE_BALL(Color.MAGENTA, 0,0.90),
     HAND_BALL(Color.PINK, DEFAULT_TIME,0.50),
-    LEVELUP(Color.GREEN, 0,0.10),
-    SLOWDOWN_BALL(Color.CYAN, DEFAULT_TIME,0.50);
-
+    LEVELUP(Color.GREEN, 0,0.90),
+    SLOWDOWN_BALL(Color.CYAN, DEFAULT_TIME,0.30);
 
     private Color color;
     private int duration;

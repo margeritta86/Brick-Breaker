@@ -11,17 +11,12 @@ public class Raquet extends MovingObject {
 
     private ControllerStatus controller;
     private RaquetControlExecution raquetControlExecution = new RaquetControlStandard(this);
-
-    private static final int
-    DEFAULT_WIDTH = GameView.WIDTH / 8,
-
-    DEFAULT_HEIGHT = GameView.HEIGHT / 48,
-    DEFAULT_X = GameView.WIDTH / 2 - DEFAULT_WIDTH / 2,
-    DEFAULT_Y = GameView.HEIGHT - DEFAULT_HEIGHT * 2,
-    DEFAULT_SPEED_X = 10;
-
-    public static final Color DEFAULT_COLOR = Color.BLUE;
-
+    public static final Color DEFAULT_COLOR = Color.CYAN;
+    private static final int DEFAULT_WIDTH = GameView.WIDTH / 8,
+                             DEFAULT_HEIGHT = GameView.HEIGHT / 48,
+                             DEFAULT_X = GameView.WIDTH / 2 - DEFAULT_WIDTH / 2,
+                             DEFAULT_Y = GameView.HEIGHT - DEFAULT_HEIGHT * 2,
+                             DEFAULT_SPEED_X = 10;
 
     public Raquet(ControllerStatus controller, Mediator mediator) {
         super(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SPEED_X, 0, DEFAULT_COLOR, Type.RAQUET, mediator);
@@ -44,7 +39,6 @@ public class Raquet extends MovingObject {
         if (controller.isSpacePressed()) {
             raquetControlExecution.spaceAction();
         }
-
     }
 
     private void correctPosition() {
@@ -62,7 +56,6 @@ public class Raquet extends MovingObject {
         graphics.fillRect(getX(), y, width, height);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(getX(), y, width, height);
-
     }
 
     public void sizeUpRaquet(int modificator) {
@@ -75,7 +68,6 @@ public class Raquet extends MovingObject {
 
     @Override
     public void reactToHit(GameObject object) {
-
     }
 
     @Override

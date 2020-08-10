@@ -1,19 +1,22 @@
 package game.model.player;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Player {
+public class Player implements Serializable, Comparable<Player> {
 
+    private static final long serialVersionUID = -1827523003065433833L;
     private String name;
     private int scores;
     private int lastLevelScore;
+    
 
     public Player() {
         name = "";
 
     }
 
-    public void reverseToLastLevelScore(){
+    public void reverseToLastLevelScore() {
         scores = lastLevelScore;
     }
 
@@ -25,7 +28,7 @@ public class Player {
         this.name = name;
     }
 
-    public void growLastLevelScore(){
+    public void growLastLevelScore() {
         lastLevelScore = scores;
     }
 
@@ -49,11 +52,15 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", scores=" + scores +
-                '}';
+        return "Player: " + name +
+                " points: " + scores;
     }
 
 
+    @Override
+    public int compareTo(Player player) {
+        return player.scores - scores ;
+    }
+    
+    
 }

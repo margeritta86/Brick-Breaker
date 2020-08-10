@@ -1,6 +1,6 @@
 package view;
 
-import controller.MenuViewController;
+import controller.MenuController;
 import controller.RankingViewController;
 import game.engine.GameViewController;
 
@@ -24,7 +24,7 @@ public class ViewFactory {
 
     private void showMenu() {
         MenuView menu = new MenuView();
-        MenuViewController menuViewController = new MenuViewController(menu,this);
+        MenuController menuController = new MenuController(menu,this);
     }
 
     private void showRanking() {

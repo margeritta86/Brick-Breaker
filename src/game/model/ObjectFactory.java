@@ -10,7 +10,12 @@ import game.model.brick.BrickSolid;
 import game.model.brick.BrickUnbreakable;
 import game.model.raquet.Raquet;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +27,8 @@ public class ObjectFactory {
 
     private List<Color> colorList = new ArrayList<>();
     private Mediator mediator;
+
+
     public ObjectFactory(Mediator mediator) {
         this.mediator = mediator;
     }
@@ -39,7 +46,7 @@ public class ObjectFactory {
             case 3:
                 return buildLevelNr3();
             case 4:
-                return  buildLevelNr4();
+                return buildLevelNr4();
             default:
                 return buildTestLevel();
 
@@ -55,6 +62,7 @@ public class ObjectFactory {
     }
 
     private List<Brick> buildLevelNr1() {
+
         colorList.add(Color.ORANGE);
         colorList.add(Color.RED);
         List<Brick> board = new ArrayList<>();
@@ -74,11 +82,9 @@ public class ObjectFactory {
         for (int i = 1; i < 10; i++) {
             board.addAll(buildRegularRow(i, i, 19 - i));
         }
-        for (int i = 10; i > 1; i--) {
-            board.addAll(buildRegularTriangleRow(i, i, 1+i));
+        for (int i = 9; i > 1; i--) {
+            board.addAll(buildRegularTriangleRow(i, i, 1 + i));
         }
-
-
         colorList.clear();
         return board;
     }
@@ -87,27 +93,32 @@ public class ObjectFactory {
         List<Brick> board = new ArrayList<>();
         colorList.add(Color.MAGENTA);
         colorList.add(Color.GREEN);
-        board.addAll(buildRowOfSolidBricks(1,1,19));
+        board.addAll(buildRowOfSolidBricks(1, 1, 19));
 
         for (int i = 2; i < 6; i++) {
             board.addAll(buildRegularRow(i, 1, 19));
         }
-        board.addAll(buildUnregularRow(6,1,19));
+        board.addAll(buildUnregularRow(6, 1, 19));
         colorList.clear();
         return board;
     }
 
     private List<Brick> buildLevelNr4() {
         List<Brick> board = new ArrayList<>();
-        colorList.add(Color.MAGENTA);
+        colorList.add(Color.ORANGE);
         colorList.add(Color.GREEN);
-        board.addAll(buildRowOfSolidBricks(1,1,19));
+        colorList.add(Color.WHITE);
+        board.addAll(buildRowOfSolidBricks(1, 1, 19));
 
-        for (int i = 2; i < 6; i++) {
+        for (int i = 2; i < 8; i++) {
             board.addAll(buildRegularRow(i, 1, 19));
         }
-        board.addAll(buildRowOfUnbreakableBricks(6,1,19));
+        board.addAll(buildRowOfUnbreakableBricks(6, 1, 19));
 
+        board.addAll(buildUnregularRow(7, 1, 19));
+        board.addAll(buildUnregularRow(8, 2, 18));
+        board.addAll(buildUnregularRow(9, 3, 17));
+        board.addAll(buildUnregularRow(10, 4, 16));
         colorList.clear();
         return board;
     }
@@ -124,11 +135,10 @@ public class ObjectFactory {
 
     private List<Brick> buildRegularTriangleRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
-       //for(int j = )
-        //TODO tutaj skończyła się edycja
+
         for (int i = numberOfRow; i < lastBrick; i++) {
-            row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
-                    chooseColorFromList(), mediator));
+                row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
+                        chooseColorFromList(), mediator));
         }
         return row;
     }
@@ -136,11 +146,11 @@ public class ObjectFactory {
 
     private List<Brick> buildUnregularRow(int numberOfRow, int firstBrick, int lastBrick) {
         List<Brick> row = new ArrayList<>();
-        for (int i = firstBrick; i < lastBrick;i++) {
+        for (int i = firstBrick; i < lastBrick; i++) {
             row.add(new BrickStandard(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
                     chooseColorFromList(), mediator));
             i++;
-            row.add(new BrickSolid(i*Brick.DEFAULT_WIDTH,Brick.DEFAULT_HEIGHT*numberOfRow,mediator));
+            row.add(new BrickSolid(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow, mediator));
         }
         return row;
     }
@@ -149,7 +159,7 @@ public class ObjectFactory {
         List<Brick> row = new ArrayList<>();
         for (int i = firstBrick; i < lastBrick; i++) {
             row.add(new BrickSolid(i * Brick.DEFAULT_WIDTH, Brick.DEFAULT_HEIGHT * numberOfRow,
-                     mediator));
+                    mediator));
         }
         return row;
     }
@@ -167,6 +177,7 @@ public class ObjectFactory {
 
     public List<GameObject> produceBallsAndRaquet(KeyboardManager keyboardManager) {
         List<GameObject> objects = new ArrayList<>(produceBalls(BALLS_INITIAL_QUANTITY));
+        //List<GameObject> objects =new ArrayList<>(produceTestBalls(1));
         objects.add(new Raquet(keyboardManager, mediator));
         return objects;
 
@@ -176,18 +187,26 @@ public class ObjectFactory {
         List<Ball> balls = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < howManyBalls; i++) {
-            balls.add(new Ball(random.nextInt(GameView.WIDTH), 20, Color.BLACK, mediator));
+            balls.add(new Ball(random.nextInt(GameView.WIDTH), 20, 5, 5, Color.YELLOW, mediator));
         }
         return balls;
     }
 
-   public List<Ball> produceBalls(int howManyBalls, Ball ball) {
+    public List<Ball> produceBalls(int howManyBalls, Ball ball) {
         List<Ball> balls = new ArrayList<>();
         for (int i = 0; i < howManyBalls; i++) {
-            balls.add(new Ball(ball.getX(), ball.getY(), Color.BLACK, mediator));
+            balls.add(new Ball(ball.getX(), ball.getY(), Color.YELLOW, mediator));
         }
         return balls;
     }
+
+    //test method
+   /* public List<Ball> produceTestBalls(int x) {
+        List<Ball> balls = new ArrayList<>();
+        balls.add(new Ball(x, 400,10,15, Color.PINK, mediator));
+        return balls;
+    }*/
+
 
     private Color chooseColorFromList() {
         Random random = new Random();

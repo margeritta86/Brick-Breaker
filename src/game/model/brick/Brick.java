@@ -10,9 +10,8 @@ import java.awt.*;
 
 public abstract class Brick extends GameObject {
 
-
     public static final int DEFAULT_HEIGHT = GameView.HEIGHT / 32,
-            DEFAULT_WIDTH = GameView.WIDTH / 20;
+                            DEFAULT_WIDTH = GameView.WIDTH / 20;
 
 
     public Brick(int x, int y, Color color, Mediator mediator) {
@@ -31,7 +30,6 @@ public abstract class Brick extends GameObject {
         graphics.fillRect(getX(), y, width, height);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(getX(), y, width, height);
-
     }
 
     @Override

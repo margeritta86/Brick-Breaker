@@ -19,11 +19,17 @@ public class ScoreCounter {
     }
 
     public void render(Graphics graphics) {
-        int x = GameView.WIDTH - (GameView.WIDTH / 8);
-        int y =  GameView.HEIGHT / 8;
+        int x = GameView.WIDTH - (GameView.WIDTH / 8)-40;
+        int y =  (GameView.HEIGHT / 8)-40;
+        graphics.setColor(Color.YELLOW);
+        graphics.fillRect(x,y,170,45);
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
-        graphics.drawString("PUNKTY:" + player.getScores(),x,y);
+        graphics.drawRect(x,y,170,45);
+
+
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
+        graphics.drawString("POINTS :" + player.getScores(),x+10,y+30);
 
     }
 

@@ -1,8 +1,10 @@
 package game.engine;
 
 import game.model.*;
+import view.GameView;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,11 +14,14 @@ public class Gameplay {
 
     private List<GameObject> objects;
     private LevelService levelService;
+    private BufferedImage image;
 
 
     public Gameplay(KeyboardManager keyboard) {
         objects = new CopyOnWriteArrayList<>();
         this.levelService = new LevelService(this, keyboard);
+        image = ImageLoader.loadImage("/game/resources/neon.png");
+        SoundEffect.MUSIC.playInLoop();
     }
 
     public void tick() {
@@ -40,9 +45,11 @@ public class Gameplay {
     }
 
     public void render(Graphics graphics) {
+        addBackground(graphics);
         for (GameObject object : objects) {
             object.render(graphics);
         }
+
         levelService.render(graphics);
     }
 
@@ -52,6 +59,10 @@ public class Gameplay {
 
     public void addObject(GameObject object) {
         this.objects.add(object);
+    }
+
+    public void addBackground(Graphics graphics){
+        graphics.drawImage(image,0,0, GameView.WIDTH,GameView.HEIGHT,null);
     }
 
     public int countObjectsByType(Type type) {

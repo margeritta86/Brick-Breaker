@@ -1,6 +1,7 @@
 package game.model.special;
 
 import game.engine.Mediator;
+import game.engine.SoundEffect;
 import game.model.GameObject;
 import game.model.ImageLoader;
 import game.model.MovingObject;
@@ -20,14 +21,16 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class Special extends MovingObject {
-
-    private static final int DEFAULT_SPEED_Y = 5, DEFAULT_SPEED_X = 0;
+    
+    
     private SpecialType type;
     private boolean used = false;
     private int secFromActivation = 0;
     private int duration;
     private BufferedImage image;
-
+    private static final int DEFAULT_SPEED_Y = 5, 
+                             DEFAULT_SPEED_X = 0;
+    
     public Special(int x, int y, SpecialType type, Mediator mediator, String imagePath) {
         super(x, y, 40, 40, DEFAULT_SPEED_X, DEFAULT_SPEED_Y, type.getColor(), Type.SPECIAL, mediator);
         this.type = type;
@@ -63,7 +66,7 @@ public abstract class Special extends MovingObject {
     public void render(Graphics graphics) {
         graphics.setColor(color);
         graphics.drawImage(image,getX(),y,width,height,null);
-        //graphics.fill3DRect(getX(), y, width, width, false);
+        
     }
 
 
@@ -187,8 +190,8 @@ class SpeedBallSpecial extends Special {
 
     @Override
     public void reverseEffect(Ball ball) {
-        ball.speedDown(SPEED_MODIFICATOR);
-        ball.setColor(Color.BLACK);
+        ball.speedDown(SPEED_MODIFICATOR/2);//TODO posprawdzać 
+        ball.setColor(Color.YELLOW);
     }
 
 }
@@ -211,7 +214,7 @@ class SlowdownBallSpecial extends Special {
     @Override
     public void reverseEffect(Ball ball) {
         ball.speedUp(SPEED_MODIFICATOR);
-        ball.setColor(Color.BLACK);
+        ball.setColor(Color.YELLOW);
     }
 
 }
@@ -319,6 +322,7 @@ class LevelUpSpecial extends Special {
 
     @Override
     public void executeEffect() {
+        SoundEffect.LEVEL_WON.play();
         mediator.wonLevel();
     }
 }

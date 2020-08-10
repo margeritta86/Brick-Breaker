@@ -5,7 +5,6 @@ import view.ViewFactory;
 
 public abstract class Controller {
 
-
     ViewFactory viewFactory;
 
     public Controller(ViewFactory viewFactory) {

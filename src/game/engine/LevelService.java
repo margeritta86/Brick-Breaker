@@ -3,11 +3,16 @@ package game.engine;
 import game.model.*;
 import game.model.player.Player;
 import game.model.ui.ScoreCounter;
+import javafx.scene.media.AudioClip;
+import repository.RankingRepository;
+import view.GameView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 
 import static game.engine.State.*;
 
@@ -23,16 +28,17 @@ public class LevelService {
     private State state;
     private boolean menuActive;
     private LocalDateTime time;
-    private int levelNumber = 2;
+    private int levelNumber = 1;
 
     public LevelService(Gameplay gameplay, KeyboardManager keyboard) {
         this.gameplay = gameplay;
         this.keyboard = keyboard;
         player = new Player();
         scoreCounter = new ScoreCounter(player);
-        mediator = new Mediator(gameplay,player);
+        mediator = new Mediator(gameplay, player);
         factory = new ObjectFactory(mediator);
         state = PLAY;
+
 
         preparePreLevel();
     }
@@ -54,7 +60,6 @@ public class LevelService {
     private void prepareStartingObjects() {
         gameplay.removeAll();
         gameplay.addObjects(factory.produceBallsAndRaquet(keyboard));
-
     }
 
     private void prepareStartingState() {
@@ -66,9 +71,21 @@ public class LevelService {
 
     public void tick() {
         handleLevelEnding();
+        //test
+        //spawnNewBall();
     }
 
-    public void render(Graphics graphics){
+ /*   // TODO test
+    int x = 0;
+    public void spawnNewBall(){
+        x++;
+        if (x%2==0) {
+           return;
+        }
+        gameplay.addObjects(new ArrayList<>(factory.produceTestBalls(x)));
+    }*/
+
+    public void render(Graphics graphics) {
         scoreCounter.render(graphics);
     }
 
@@ -113,24 +130,23 @@ public class LevelService {
     }
 
     private void levelWon() {
-        System.out.println("TIME IN LEVEL " + time.until(LocalDateTime.now(), ChronoUnit.SECONDS));
+        System.out.println("TIME IN LEVEL:  " + time.until(LocalDateTime.now(), ChronoUnit.SECONDS));
+        SoundEffect.LEVEL_WON.play();
         menuActive = true;
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
 
-                int answer = JOptionPane.showConfirmDialog(null, "Poziom zakończony w czasie: " + time.until(LocalDateTime.now(), ChronoUnit.SECONDS) + " sekund \nCzy chcesz zagrać w kolejny level?");
+                int answer = JOptionPane.showConfirmDialog(null, "You played for : " + time.until(LocalDateTime.now(), ChronoUnit.SECONDS) + " secounds \nDo you wanna play next level?");
                 if (answer == JOptionPane.OK_OPTION) {
                     LevelService.this.prepareStage();
                     LevelService.this.buildNextLevel();
                     player.growLastLevelScore();
-
                 } else {
                     System.exit(0);
                 }
             }
         });
-
     }
 
     private synchronized void buildNextLevel() {
@@ -138,21 +154,21 @@ public class LevelService {
     }
 
     private void saveScores() {
-
-        String name = JOptionPane.showInputDialog("Otrzymałeś: "+ player.getScores() + " punktów. Wpisz swoje imię, aby dopisac Cię do rankingu:");
-        if (name != null && !name.isEmpty()) {
-            player.setName(name);
+        String name = JOptionPane.showInputDialog("You got: " + player.getScores() + " points. Write your name to add you to Ranking!");
+        if (name == null || name.isEmpty()) {
+            return;
         }
-
+        player.setName(name);
+        RankingRepository ranking = new RankingRepository();
+        ranking.save(player);
     }
 
 
     private void levelRepeat() {
-
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                int answer = JOptionPane.showConfirmDialog(null, "Przegrałeś!\nCzy chcesz powótrzyć poziom " + levelNumber + " ?");
+                int answer = JOptionPane.showConfirmDialog(null, "You loose!\nDo you wanna repeat level:  " + levelNumber + " ?");
                 if (answer == JOptionPane.OK_OPTION) {
                     LevelService.this.prepareStage();
                     LevelService.this.buildLevel();
@@ -162,7 +178,6 @@ public class LevelService {
                 }
             }
         });
-
     }
 
     public boolean isPlaying() {

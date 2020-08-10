@@ -16,6 +16,7 @@ public abstract class GameObject {
     private Type type;
     protected Mediator mediator;
 
+
    public GameObject(int x, int y,int width, int height, Type type, Mediator mediator) {
        this.setX(x);
        this.y = y;
@@ -44,7 +45,6 @@ public abstract class GameObject {
         this.mediator = mediator;
         active = true;
     }
-
 
     public abstract void tick();
 

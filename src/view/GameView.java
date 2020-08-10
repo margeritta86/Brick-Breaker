@@ -16,7 +16,7 @@ public class GameView extends View {
 
 
     public GameView() {
-        super("Game Play", ViewType.GAME);
+        super("Bouncing Ball", ViewType.GAME);
         size = new Dimension(WIDTH, HEIGHT);
         createAndSetupFrame();
         createAndSetupCanvas();
@@ -40,6 +40,8 @@ public class GameView extends View {
         add(canvas);
         canvas.setFocusable(true);
         canvas.requestFocusInWindow();
+        
+
     }
 
     public Canvas getCanvas() {

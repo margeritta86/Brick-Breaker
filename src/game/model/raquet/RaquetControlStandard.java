@@ -11,7 +11,7 @@ public class RaquetControlStandard implements RaquetControlExecution {
     @Override
     public void leftAction() {
         raquet.setX((int) (raquet.getX() - raquet.getSpeedX()));
-    } // todo refactor to new method increase
+    } 
 
     @Override
     public void rightAction() {

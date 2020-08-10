@@ -18,12 +18,10 @@ public class BallRaquetCollisionHandBall implements BallRaquetCollision {
     @Override
     public void executeRaquetCollision(Rectangle bounds) {
         // jeśli ponizej sekundy(gdy nie jest nulem) lub jest juz przyklejona
-        if ( ball.isFrozen() /* isNotTimeToBounce()*/) {
+        if ( ball.isFrozen()) {
             return;
         }
-
         bounceCollision.bounce(bounds);
-        System.out.println("BOUNCE");
         ball.stickedBall = true;
         counter = LocalTime.now();
     }

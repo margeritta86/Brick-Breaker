@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class SpecialFactory {
 
-    final static int DEFAULT_TIME = 5;
+    public final static int DEFAULT_TIME = 5;
     private final static double SPAWN_CHANCE = 0.20;
     private Random random = new Random();
     private Mediator mediator;
@@ -24,20 +24,18 @@ public class SpecialFactory {
         if (result > SPAWN_CHANCE) {
             return Optional.empty();
         }
+
         SpecialType type = SpecialType.values()[random.nextInt(SpecialType.values().length)];
-
         double resultOfChance = random.nextDouble();
-        if (type.getChance() >= resultOfChance) {
 
+        if (type.getChance() >= resultOfChance) {
             int x = brick.getX() + brick.getWidth() / 2;
             int y = brick.getY() + brick.getHeight() / 2;
             return Optional.of(drawSpecial(type, x, y));
-
         } else return Optional.empty();
     }
 
     private Special drawSpecial(SpecialType type, int x, int y) {
-
 
         switch (type) {
             case WIDER_RAQUET:

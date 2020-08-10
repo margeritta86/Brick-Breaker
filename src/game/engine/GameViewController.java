@@ -2,11 +2,13 @@ package game.engine;
 
 
 import controller.Controller;
+import game.model.ImageLoader;
 import view.GameView;
 import view.ViewFactory;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class GameViewController extends Controller implements Runnable {
 
@@ -15,6 +17,8 @@ public class GameViewController extends Controller implements Runnable {
     private Thread thread;
     private boolean running;
     private BufferStrategy strategy;
+
+
 
     private Gameplay gameplay;
 
@@ -27,6 +31,7 @@ public class GameViewController extends Controller implements Runnable {
         this.gameView.addKeyManager(keyboard);
         gameplay = new Gameplay(keyboard);
         start();
+
     }
 
     @Override
@@ -70,6 +75,8 @@ public class GameViewController extends Controller implements Runnable {
         }
         renderFrame();
 
+
+
     }
 
     private boolean ensureBufferReady() {
@@ -84,13 +91,10 @@ public class GameViewController extends Controller implements Runnable {
     }
 
     private void renderFrame() {
+        
         Graphics graphics = strategy.getDrawGraphics();
-
-        graphics.clearRect(0, 0, GameView.WIDTH, GameView.HEIGHT);         //clear screen
-
-        //DRAW HERE
+        graphics.clearRect(0, 0, GameView.WIDTH, GameView.HEIGHT);        
         gameplay.render(graphics);
-        // FINALISING
         strategy.show();
         graphics.dispose();
     }

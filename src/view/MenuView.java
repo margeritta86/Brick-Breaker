@@ -13,7 +13,7 @@ public class MenuView extends View {
     private JPanel mainPanel;
 
     public MenuView() throws HeadlessException {
-        super("Game", ViewType.MENU);
+        super("Bouncing Ball", ViewType.MENU);
         buildMainComponents();
         prepareOtherComponents();
         pack();
@@ -26,9 +26,9 @@ public class MenuView extends View {
     }
 
     private void prepareOtherComponents() {
-        startButton = new JButton("Start game");
-        exitButton = new JButton("EXIT game");
-        rankingButton = new JButton("Show Ranking");
+        startButton = new JButton("START GAME");
+        exitButton = new JButton("EXIT GAME");
+        rankingButton = new JButton("SHOW RANKING");
 
         mainPanel.add(startButton);
         mainPanel.add(rankingButton);

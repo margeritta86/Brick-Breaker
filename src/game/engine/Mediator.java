@@ -6,13 +6,14 @@ import game.model.brick.Brick;
 import game.model.player.Player;
 import game.model.special.Special;
 
-//komunikuje obiekty majace interkacje
+//komunikuje obiekty majace interakcje
 
 public class Mediator {
 
     private Gameplay gameplay;
     private SpecialManager specialManager;
     private Player player;
+    
 
     public Mediator(Gameplay gameplay, Player player) {
         this.gameplay = gameplay;
@@ -27,7 +28,23 @@ public class Mediator {
             }
             boolean wasHit = ball.doBrickCollision(gameObject);
             if (wasHit) {
+                /*Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            se = SoundEffect.HIT;
+                            se.play(true);
+                        }catch(Throwable e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+                thread.start();*/
                 gameObject.reactToHit(ball);
+
+
+
             }
         }
     }
@@ -37,7 +54,7 @@ public class Mediator {
         gameplay.addObjects(objectFactory.produceBalls(2, ball));
     }
 
-    public void wonLevel(){
+    public void wonLevel() {
         gameplay.getLevelService().setState(State.WIN);
     }
 

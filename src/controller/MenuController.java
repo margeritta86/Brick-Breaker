@@ -7,11 +7,11 @@ import view.ViewType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuViewController extends Controller{
+public class MenuController extends Controller{
 
     private MenuView menuView;
 
-    public MenuViewController(MenuView menuView, ViewFactory viewFactory) {
+    public MenuController(MenuView menuView, ViewFactory viewFactory) {
         super( viewFactory);
         this.menuView = menuView;
         addButtonActions();
@@ -41,9 +41,7 @@ public class MenuViewController extends Controller{
         });
 
     }
-
-
-
+    
     private void startAction() {
         viewFactory.showView(ViewType.GAME);
 

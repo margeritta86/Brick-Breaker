@@ -1,5 +1,6 @@
 package game.model.ball;
 
+import game.engine.SoundEffect;
 import view.GameView;
 import game.engine.Mediator;
 import game.model.GameObject;
@@ -18,6 +19,10 @@ public class Ball extends MovingObject {
 
     public Ball(int x, int y, Color color, Mediator mediator) {
         super(x, y, SIZE, SIZE,  color, Type.BALL, mediator);
+    }
+
+    public Ball(int x, int y, double speedX, double speedY, Color color, Mediator mediator) {
+        super(x, y, SIZE, SIZE, speedX,speedY, color, Type.BALL, mediator);
     }
 
     public void accept(Special special) {
@@ -80,13 +85,19 @@ public class Ball extends MovingObject {
         boolean isInYRange = isInYRange(bounds);
         boolean isinXRange = isInXRange(bounds);
 
-        if (isInYRange && isLeftHit(bounds)) {//LEWA
+        if (obstacle.getType()==Type.RAQUET && isTopHit(bounds) && isinXRange) {
+            SoundEffect.PLOOP.play();
+            executeRaquetCollision(bounds);
+            return true;
+        }
+
+        if (isInYRange && isLeftHit(bounds)) {//LEFT
             executeLeftCollision(bounds);
-        } else if (isInYRange && isRightHit(bounds)) {//PRAWA
+        } else if (isInYRange && isRightHit(bounds)) {//RIGHT
             executeRightCollision(bounds);
-        } else if (isTopHit(bounds) && isinXRange) {//GÓRA
-            executeTopCollision(obstacle);
-        } else if (isBottomHit(bounds) && isinXRange) {//DÓŁ
+        } else if (isTopHit(bounds) && isinXRange) {//TOP
+            executeSimpleTopCollision(bounds);
+        } else if (isBottomHit(bounds) && isinXRange) {//BOTTOM
             executeBottomCollision(bounds);
         } else {
             return false;
@@ -95,14 +106,14 @@ public class Ball extends MovingObject {
     }
 
 
-    private void executeTopCollision(GameObject obstacle) {
+   /* private void executeTopCollision(GameObject obstacle) {
         Rectangle bounds = obstacle.getBounds();
         if (obstacle.getType() == Type.RAQUET) {
             executeRaquetCollision(bounds);
         } else {
             executeSimpleTopCollision(bounds);
         }
-    }
+    }*/
 
     private void executeSimpleTopCollision(Rectangle bounds) {
         setSpeedY(-getSpeedY());
@@ -155,6 +166,7 @@ public class Ball extends MovingObject {
 
     @Override
     public void reactToHit(GameObject obstacle) {
+        
 
     }
 
@@ -197,5 +209,9 @@ public class Ball extends MovingObject {
     @Override
     public boolean isFrozen() {
         return stickedBall;
+    }
+
+    public static int getSIZE() {
+        return SIZE;
     }
 }
