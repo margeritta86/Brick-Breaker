@@ -173,47 +173,6 @@ public abstract class Special extends MovingObject {
     }
 }
 
-/*class StartBallSpecial extends HandBallSpecial {
-
-    private List<Ball> handBalls = new ArrayList<>();
-
-    public StartBallSpecial(Mediator mediator) {
-        super(-100, -50, mediator);
-        type = SpecialType.START_BALL;
-        duration = type.getDuration();
-
-
-    }
-
-    @Override
-    public void executeEffect(Ball ball) {  // gdy piłka udezy w paletke
-        ball.setCollision(new BallRaquetCollisionHandBall(ball));
-        handBalls.add(ball);
-    }
-
-    @Override
-    public void reverseEffect(Ball ball) { //przy wcisnieciu spacji
-        ball.setStickedBall(false);
-        ball.setCollision(new BallRaquetCollisionStandard(ball));
-        handBalls.clear();
-    }
-
-    @Override
-    public void reverseEffect(Raquet raquet) { // kiedy wychodzi z efektu
-        raquet.setRaquetControlExecution(new RaquetControlStandard(raquet));
-        raquet.setColor(Raquet.DEFAULT_COLOR);
-    }
-
-    @Override
-    public void executeEffect(Raquet raquet) { //kiedy wchodzi w efekt
-        raquet.setRaquetControlExecution(new RaquetControlHandBall(raquet, handBalls));
-        raquet.setColor(Color.GREEN);
-    }
-
-}*/
-
-
-
 class SpeedBallSpecial extends Special {
     private final static int SPEED_MODIFICATOR = 5;
 

@@ -27,7 +27,7 @@ public class LevelService {
     private State state;
     private boolean menuActive;
     private LocalDateTime time;
-    private int levelNumber = 4;
+    private int levelNumber = 1;
 
     public LevelService(Gameplay gameplay, KeyboardManager keyboard, MouseManager mouse) {
         this.gameplay = gameplay;
@@ -91,13 +91,9 @@ public class LevelService {
             state = LOOSE;
         } else if (isLevelWon()) {
             state = WIN;
+        } else if (isGameOver()) {
+            state = GAME_OVER;
         }
-        else if(isGameOver()){
-            state=GAME_OVER;
-
-        }
-
-        System.out.println(state);
 
     }
 
@@ -109,9 +105,9 @@ public class LevelService {
         return gameplay.countObjectsByType(Type.BRICK) == 0;
     }
 
-    private boolean isGameOver(){
+    private boolean isGameOver() {
 
-        return isLevelWon() && levelNumber>=4 ||state ==WIN && levelNumber>=4;
+        return isLevelWon() && levelNumber >= 4 || state == WIN && levelNumber >= 4;
     }
 
     private boolean isGameEnded() {
@@ -158,10 +154,10 @@ public class LevelService {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JOptionPane.showMessageDialog(null,"CONTGRATULATIONS!"+" \uD83E\uDD47"+"\nYOU PASSED ALL LEVELS!\nAND REACHED: "+player.getScores() + "points!");
-               saveScores();
+                JOptionPane.showMessageDialog(null, "CONTGRATULATIONS!" + " \uD83E\uDD47" + "\nYOU PASSED ALL LEVELS!\nAND REACHED: " + player.getScores() + "points!");
+                saveScores();
                 System.exit(0);
-                }
+            }
         });
 
     }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="odbijanie:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/odbijanie_jar</output-path>
+    <root id="archive" name="odbijanie.jar">
+      <element id="module-output" name="odbijanie" />
+    </root>
+  </artifact>
+</component>

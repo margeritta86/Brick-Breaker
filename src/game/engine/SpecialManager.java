@@ -32,8 +32,6 @@ public class SpecialManager implements ActionListener {
     public void activateStartingSpecials() {
         Special startBall = specialFactory.createHandBallOnStartSpecial();
         executeNewSpecial(startBall);
-        System.out.println(activatedSpecials);
-
     }
 
     public void spawnSpecial(Brick brick) {
@@ -48,8 +46,6 @@ public class SpecialManager implements ActionListener {
         for (GameObject gameObject : gameplay.getObjects()) {
             gameObject.accept(special);
         }
-        System.out.println(gameplay.getObjects());
-
     }
 
     private void updateActivatedSpecial(Special special) {

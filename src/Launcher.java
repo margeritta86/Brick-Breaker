@@ -1,12 +1,8 @@
 
-
-import game.engine.GameViewController;
-import view.MenuView;
 import view.ViewFactory;
 import view.ViewType;
-
 import javax.swing.*;
-import java.awt.*;
+
 
 public class Launcher {
     public static void main(String[] args) {
@@ -17,9 +13,6 @@ public class Launcher {
                 runApplication();
             }
         });
-
-       // GameViewController game = new GameViewController("Odbijanie");
-      //  game.start();
     }
 
     private static void runApplication(){
