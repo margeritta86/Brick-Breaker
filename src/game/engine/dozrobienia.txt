@@ -42,4 +42,4 @@ Potencjalne bugi:
 nowe piłki nie będą się przyklejać gdy zostały dodadane gdy działa handball
 
 do poprawy:
-w kolejnych levelach nie włącza się special owiększający paletkę przy zebraniu go - sprawdzić pozostałe?
+

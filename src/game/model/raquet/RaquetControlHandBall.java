@@ -16,18 +16,7 @@ public class RaquetControlHandBall implements RaquetControlExecution {
     }
 
     @Override
-    public void leftAction() {
-        raquet.setX(raquet.getX() - raquet.getSpeedX());
-        if (raquet.isPositionToCorrect()) {
-            return;
-        }
-        for (Ball stickedBall : findStickedBalls()) {
-            stickedBall.setX(stickedBall.getX() - raquet.getSpeedX());
-        }
-    }
-
-    @Override
-    public void rightAction() {
+    public void horizontalAction() {
         raquet.setX(raquet.getX() + raquet.getSpeedX());
         if (raquet.isPositionToCorrect()) {
             return;

@@ -1,5 +1,6 @@
 package game.model;
 
+import game.engine.MouseManager;
 import game.model.brick.BrickStandard;
 import view.GameView;
 import game.engine.KeyboardManager;
@@ -10,12 +11,7 @@ import game.model.brick.BrickSolid;
 import game.model.brick.BrickUnbreakable;
 import game.model.raquet.Raquet;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,6 +43,8 @@ public class ObjectFactory {
                 return buildLevelNr3();
             case 4:
                 return buildLevelNr4();
+            case 5:
+
             default:
                 return buildTestLevel();
 
@@ -175,10 +173,9 @@ public class ObjectFactory {
         return row;
     }
 
-    public List<GameObject> produceBallsAndRaquet(KeyboardManager keyboardManager) {
+    public List<GameObject> produceBallsAndRaquet(KeyboardManager keyboardManager, MouseManager mouseManager) {
         List<GameObject> objects = new ArrayList<>(produceBalls(BALLS_INITIAL_QUANTITY));
-        //List<GameObject> objects =new ArrayList<>(produceTestBalls(1));
-        objects.add(new Raquet(keyboardManager, mediator));
+        objects.add(new Raquet(keyboardManager, mouseManager, mediator));
         return objects;
 
     }
@@ -187,7 +184,7 @@ public class ObjectFactory {
         List<Ball> balls = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < howManyBalls; i++) {
-            balls.add(new Ball(random.nextInt(GameView.WIDTH), 20, 5, 5, Color.YELLOW, mediator));
+            balls.add(new Ball(random.nextInt( Raquet.DEFAULT_WIDTH) +Raquet.DEFAULT_X, Raquet.DEFAULT_Y-Ball.getSIZE(), 5, 5, Color.YELLOW, mediator));
         }
         return balls;
     }
@@ -199,14 +196,6 @@ public class ObjectFactory {
         }
         return balls;
     }
-
-    //test method
-   /* public List<Ball> produceTestBalls(int x) {
-        List<Ball> balls = new ArrayList<>();
-        balls.add(new Ball(x, 400,10,15, Color.PINK, mediator));
-        return balls;
-    }*/
-
 
     private Color chooseColorFromList() {
         Random random = new Random();

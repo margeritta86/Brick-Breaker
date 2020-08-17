@@ -9,12 +9,7 @@ public class RaquetControlStandard implements RaquetControlExecution {
     }
 
     @Override
-    public void leftAction() {
-        raquet.setX((int) (raquet.getX() - raquet.getSpeedX()));
-    } 
-
-    @Override
-    public void rightAction() {
+    public void horizontalAction() {
         raquet.setX((int) (raquet.getX() + raquet.getSpeedX()));
     }
 

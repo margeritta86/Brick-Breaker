@@ -19,15 +19,16 @@ public class ScoreCounter {
     }
 
     public void render(Graphics graphics) {
+        int alpha = 80; // 50% transparent
         int x = GameView.WIDTH - (GameView.WIDTH / 8)-40;
-        int y =  (GameView.HEIGHT / 8)-40;
-        graphics.setColor(Color.YELLOW);
+        int y =  (GameView.HEIGHT / 8)-80;
+        graphics.setColor(new Color(255,255,0,alpha));
         graphics.fillRect(x,y,170,45);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(x,y,170,45);
 
 
-        graphics.setColor(Color.BLACK);
+        graphics.setColor(Color.MAGENTA);
         graphics.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
         graphics.drawString("POINTS :" + player.getScores(),x+10,y+30);
 

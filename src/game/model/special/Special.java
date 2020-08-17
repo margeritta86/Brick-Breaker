@@ -23,10 +23,10 @@ import java.util.Objects;
 public abstract class Special extends MovingObject {
     
     
-    private SpecialType type;
+     SpecialType type;
     private boolean used = false;
     private int secFromActivation = 0;
-    private int duration;
+    int duration;
     private BufferedImage image;
     private static final int DEFAULT_SPEED_Y = 5, 
                              DEFAULT_SPEED_X = 0;
@@ -145,8 +145,8 @@ public abstract class Special extends MovingObject {
         return false;
     }
 
-    public int getDuration() {
-        return duration;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override
@@ -173,11 +173,52 @@ public abstract class Special extends MovingObject {
     }
 }
 
+/*class StartBallSpecial extends HandBallSpecial {
+
+    private List<Ball> handBalls = new ArrayList<>();
+
+    public StartBallSpecial(Mediator mediator) {
+        super(-100, -50, mediator);
+        type = SpecialType.START_BALL;
+        duration = type.getDuration();
+
+
+    }
+
+    @Override
+    public void executeEffect(Ball ball) {  // gdy piłka udezy w paletke
+        ball.setCollision(new BallRaquetCollisionHandBall(ball));
+        handBalls.add(ball);
+    }
+
+    @Override
+    public void reverseEffect(Ball ball) { //przy wcisnieciu spacji
+        ball.setStickedBall(false);
+        ball.setCollision(new BallRaquetCollisionStandard(ball));
+        handBalls.clear();
+    }
+
+    @Override
+    public void reverseEffect(Raquet raquet) { // kiedy wychodzi z efektu
+        raquet.setRaquetControlExecution(new RaquetControlStandard(raquet));
+        raquet.setColor(Raquet.DEFAULT_COLOR);
+    }
+
+    @Override
+    public void executeEffect(Raquet raquet) { //kiedy wchodzi w efekt
+        raquet.setRaquetControlExecution(new RaquetControlHandBall(raquet, handBalls));
+        raquet.setColor(Color.GREEN);
+    }
+
+}*/
+
+
+
 class SpeedBallSpecial extends Special {
     private final static int SPEED_MODIFICATOR = 5;
 
     public SpeedBallSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.SPEED_BALL, mediator, "/game/resources/speedUp.png");
+        super(x, y, SpecialType.SPEED_BALL, mediator, "/game/resources/special_icons/speedUp.png");
     }
 
 
@@ -200,7 +241,7 @@ class SlowdownBallSpecial extends Special {
     private final static int SPEED_MODIFICATOR = 5;
 
     public SlowdownBallSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.SLOWDOWN_BALL, mediator, "/game/resources/slowDown.png");
+        super(x, y, SpecialType.SLOWDOWN_BALL, mediator, "/game/resources/special_icons/slowDown.png");
     }
 
 
@@ -224,7 +265,7 @@ class WiderRaquetSpecial extends Special {
     private final static int SIZE_MODIFICATOR = 60;
 
     public WiderRaquetSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.WIDER_RAQUET, mediator, "/game/resources/widerRaquet.png");
+        super(x, y, SpecialType.WIDER_RAQUET, mediator, "/game/resources/special_icons/widerRaquet.png");
     }
 
     @Override
@@ -245,7 +286,7 @@ class NarrowerRaquetSpecial extends Special {
     private final static int SIZE_MODIFICATOR = 60;
 
     public NarrowerRaquetSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.NARROWER_RAQUET, mediator, "/game/resources/narrowerRaquet.png");
+        super(x, y, SpecialType.NARROWER_RAQUET, mediator, "/game/resources/special_icons/narrowerRaquet.png");
     }
 
     @Override
@@ -265,7 +306,7 @@ class DoubleBallSpecial extends Special {
 
 
     public DoubleBallSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.DOUBLE_BALL, mediator, "/game/resources/3balls.png");
+        super(x, y, SpecialType.DOUBLE_BALL, mediator, "/game/resources/special_icons/3balls.png");
     }
 
     @Override
@@ -284,7 +325,8 @@ class HandBallSpecial extends Special {
     private List<Ball> handBalls = new ArrayList<>();
 
     public HandBallSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.HAND_BALL, mediator, "/game/resources/handBall.png");
+        super(x, y, SpecialType.HAND_BALL, mediator, "/game/resources/special_icons/handBall.png");
+
     }
 
     @Override
@@ -312,12 +354,14 @@ class HandBallSpecial extends Special {
         raquet.setColor(Color.GREEN);
     }
 
+
+
 }
 
 class LevelUpSpecial extends Special {
 
     public LevelUpSpecial(int x, int y, Mediator mediator) {
-        super(x, y, SpecialType.LEVELUP, mediator, "/game/resources/levelUp.png");
+        super(x, y, SpecialType.LEVELUP, mediator, "/game/resources/special_icons/levelUp.png");
     }
 
     @Override

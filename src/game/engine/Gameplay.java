@@ -17,11 +17,12 @@ public class Gameplay {
     private BufferedImage image;
 
 
-    public Gameplay(KeyboardManager keyboard) {
+    public Gameplay(KeyboardManager keyboard, MouseManager mouse) {
         objects = new CopyOnWriteArrayList<>();
-        this.levelService = new LevelService(this, keyboard);
-        image = ImageLoader.loadImage("/game/resources/neon.png");
+        this.levelService = new LevelService(this, keyboard, mouse);
+        image = ImageLoader.loadImage("/game/resources/backgrounds/neon.png");
         SoundEffect.MUSIC.playInLoop();
+
     }
 
     public void tick() {

@@ -36,6 +36,7 @@ public class SpecialFactory {
     }
 
     private Special drawSpecial(SpecialType type, int x, int y) {
+        type = SpecialType.LEVELUP;
 
         switch (type) {
             case WIDER_RAQUET:
@@ -57,4 +58,9 @@ public class SpecialFactory {
         }
     }
 
+    public Special createHandBallOnStartSpecial() {
+        Special startSpecial = new HandBallSpecial(-100,-100,mediator);
+        startSpecial.setDuration(3);
+        return  startSpecial;
+    }
 }

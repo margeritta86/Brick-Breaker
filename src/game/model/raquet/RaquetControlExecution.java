@@ -2,9 +2,9 @@ package game.model.raquet;
 
 public interface RaquetControlExecution {
 
-    void leftAction();
+    void horizontalAction();
 
-    void rightAction();
+
 
     void spaceAction();
 

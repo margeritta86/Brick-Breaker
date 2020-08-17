@@ -17,7 +17,6 @@ public class Mediator {
 
     public Mediator(Gameplay gameplay, Player player) {
         this.gameplay = gameplay;
-        specialManager = new SpecialManager(gameplay, this);
         this.player = player;
     }
 
@@ -69,5 +68,9 @@ public class Mediator {
 
     public void incrementPlayerScore() {
         player.incrementScore();
+    }
+
+    public void setSpecialManager(SpecialManager specialManager) {
+        this.specialManager = specialManager;
     }
 }

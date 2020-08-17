@@ -13,5 +13,6 @@ public abstract class View extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         this.viewType = viewType;
+        this.setIconImage(new ImageIcon(getClass().getResource("/game/resources/icon3.png")).getImage());
     }
 }

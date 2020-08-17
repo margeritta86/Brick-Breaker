@@ -14,9 +14,12 @@ public class GameViewController extends Controller implements Runnable {
 
     private GameView gameView;
     private KeyboardManager keyboard;
+    private MouseManager mouse;
     private Thread thread;
     private boolean running;
     private BufferStrategy strategy;
+    public Cursor cursor;
+
 
 
 
@@ -28,8 +31,9 @@ public class GameViewController extends Controller implements Runnable {
         running = false;
         this.gameView = gameView;
         keyboard = new KeyboardManager();
+        mouse = new MouseManager(gameView.getCanvas());
         this.gameView.addKeyManager(keyboard);
-        gameplay = new Gameplay(keyboard);
+        gameplay = new Gameplay(keyboard,mouse);
         start();
 
     }
@@ -67,6 +71,7 @@ public class GameViewController extends Controller implements Runnable {
 
     private void tick() {
         gameplay.tick();
+        mouse.tick();
     }
 
     private void render() {
@@ -74,15 +79,12 @@ public class GameViewController extends Controller implements Runnable {
             return;
         }
         renderFrame();
-
-
-
     }
 
     private boolean ensureBufferReady() {
         Canvas canvas = gameView.getCanvas();
         strategy = canvas.getBufferStrategy();
-
+        setBlankCursor(canvas);
         if (strategy == null) {
             canvas.createBufferStrategy(3);
             return false;
@@ -90,8 +92,13 @@ public class GameViewController extends Controller implements Runnable {
         return true;
     }
 
+    private void setBlankCursor(Canvas canvas) {
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+        canvas.setCursor(blankCursor);
+    }
+
     private void renderFrame() {
-        
         Graphics graphics = strategy.getDrawGraphics();
         graphics.clearRect(0, 0, GameView.WIDTH, GameView.HEIGHT);        
         gameplay.render(graphics);
@@ -103,7 +110,6 @@ public class GameViewController extends Controller implements Runnable {
         if (running) {
             return;
         }
-
         running = true;
         thread = new Thread(this);
         thread.start();
@@ -121,6 +127,4 @@ public class GameViewController extends Controller implements Runnable {
             e.printStackTrace();
         }
     }
-
-
 }

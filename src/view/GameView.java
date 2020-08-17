@@ -2,11 +2,8 @@ package view;
 
 
 import game.engine.KeyboardManager;
-
-import javax.swing.*;
 import java.awt.*;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GameView extends View {
     public static final int HEIGHT = 800;
@@ -40,8 +37,6 @@ public class GameView extends View {
         add(canvas);
         canvas.setFocusable(true);
         canvas.requestFocusInWindow();
-        
-
     }
 
     public Canvas getCanvas() {

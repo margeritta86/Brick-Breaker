@@ -9,18 +9,21 @@ import java.awt.*;
 
 public class Raquet extends MovingObject {
 
-    private ControllerStatus controller;
+    private ControllerStatus keyBoardController;
+    private ControllerStatus mouseController;
     private RaquetControlExecution raquetControlExecution = new RaquetControlStandard(this);
     public static final Color DEFAULT_COLOR = Color.CYAN;
-    private static final int DEFAULT_WIDTH = GameView.WIDTH / 8,
-                             DEFAULT_HEIGHT = GameView.HEIGHT / 48,
-                             DEFAULT_X = GameView.WIDTH / 2 - DEFAULT_WIDTH / 2,
-                             DEFAULT_Y = GameView.HEIGHT - DEFAULT_HEIGHT * 2,
-                             DEFAULT_SPEED_X = 10;
+    public static final int DEFAULT_WIDTH = GameView.WIDTH / 8,
+            DEFAULT_HEIGHT = GameView.HEIGHT / 48,
+            DEFAULT_Y = GameView.HEIGHT - DEFAULT_HEIGHT * 2;
+    public static final int SPEED_X = 10,
+            DEFAULT_X = GameView.WIDTH / 2 - DEFAULT_WIDTH / 2;
 
-    public Raquet(ControllerStatus controller, Mediator mediator) {
-        super(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SPEED_X, 0, DEFAULT_COLOR, Type.RAQUET, mediator);
-        this.controller = controller;
+
+    public Raquet(ControllerStatus keyBoardController, ControllerStatus mouseController, Mediator mediator) {
+        super(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT, SPEED_X, 0, DEFAULT_COLOR, Type.RAQUET, mediator);
+        this.keyBoardController = keyBoardController;
+        this.mouseController = mouseController;
     }
 
     @Override
@@ -30,14 +33,25 @@ public class Raquet extends MovingObject {
     }
 
     private void executeInput() {
-        if (controller.isRightPressed()) {
-            raquetControlExecution.rightAction();
+        int keyBoardSpeed = Math.abs(keyBoardController.getHorizontalMovement());
+        int mouseSpeed = Math.abs(mouseController.getHorizontalMovement());
+        chooseKeyboardOrMouse(keyBoardSpeed, mouseSpeed);
+
+        if (speedX != 0) {
+            raquetControlExecution.horizontalAction();
         }
-        if (controller.isLeftPressed()) {
-            raquetControlExecution.leftAction();
-        }
-        if (controller.isSpacePressed()) {
+        if (keyBoardController.isActionPressed()) {
             raquetControlExecution.spaceAction();
+        }
+    }
+
+    private void chooseKeyboardOrMouse(int keyBoardSpeed, int mouseSpeed) {
+        if (keyBoardSpeed > mouseSpeed) {
+            speedX = keyBoardController.getHorizontalMovement();
+        } else if (mouseSpeed > keyBoardSpeed) {
+            speedX = -mouseController.getHorizontalMovement();
+        }else {
+            speedX = 0;
         }
     }
 

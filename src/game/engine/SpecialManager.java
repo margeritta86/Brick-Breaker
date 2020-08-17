@@ -18,17 +18,25 @@ public class SpecialManager implements ActionListener {
     private Gameplay gameplay;
     private Mediator mediator;
     private Timer timer;
+    private SpecialFactory specialFactory;
 
     public SpecialManager(Gameplay gameplay, Mediator mediator) {
         this.gameplay = gameplay;
         this.mediator = mediator;
+        specialFactory = new SpecialFactory(mediator);
         activatedSpecials = new ArrayList<>();
         timer = new Timer(1000, this);
         timer.start();
     }
 
+    public void activateStartingSpecials() {
+        Special startBall = specialFactory.createHandBallOnStartSpecial();
+        executeNewSpecial(startBall);
+        System.out.println(activatedSpecials);
+
+    }
+
     public void spawnSpecial(Brick brick) {
-        SpecialFactory specialFactory = new SpecialFactory(mediator);
         Optional<Special> special = specialFactory.produceSpecial(brick);
         if (special.isPresent()) {
             gameplay.addObject(special.get());
@@ -40,6 +48,8 @@ public class SpecialManager implements ActionListener {
         for (GameObject gameObject : gameplay.getObjects()) {
             gameObject.accept(special);
         }
+        System.out.println(gameplay.getObjects());
+
     }
 
     private void updateActivatedSpecial(Special special) {
@@ -83,7 +93,7 @@ public class SpecialManager implements ActionListener {
 
     private void doubleTimeSpecial(Special special) {
         for (Special activatedSpecial : activatedSpecials) {
-            if (special.equals(activatedSpecial)){
+            if (special.equals(activatedSpecial)) {
                 activatedSpecial.doubleTime();
             }
         }
