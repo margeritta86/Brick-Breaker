@@ -15,19 +15,46 @@ A Simple game in which we have to smash a wall of bricks by deflecting a bouncin
 I wanted to create my first game which be very similar to the game I played in my childhood. I wanted to actually do whole graphic and make it „alive”.
 
 ## Screenshots
+<img src="/brick-breaker.gif" width="350"/>
+<br>
+<img src="/brick-breaker2.gif" width="350"/>
 
 
 ## Technologies
-* Java  version 14.0
-* Biblioteka SWING 
-* Biblioteka AWT
+
+Libraries I used in my Game: 
+* java.io.*
+* javax.swing.*
+* java.awt.*;
+* java.awt.event.*;
+* java.util.*;
+* java.imageio.*;
 
 ## Setup
 Describe how to install / setup your local environement / add link to demo version.
 
+Installation would require the following components and configurations:
+* Maven
+* Github
+* Latest version of Java
+
+After these are all set up, you can follow the next few instructions to get a copy of the application on your computer and test run the program:
+
+1. Download the whole repo
+2. Change the directory with the `cd` command into the *BrickBreaker* folder that is in the folder where the repo had been clone to
+3. Run the program with `java -jar target/odbijanie.jar`
+
 ## Code Examples
-Show examples of usage:
-`put-your-code-here`
+
+`private void chooseKeyboardOrMouse(int keyBoardSpeed, int mouseSpeed) {
+        if (keyBoardSpeed > mouseSpeed) {
+            speedX = keyBoardController.getHorizontalMovement();
+        } else if (mouseSpeed > keyBoardSpeed) {
+            speedX = -mouseController.getHorizontalMovement();
+        }else {
+            speedX = 0;
+        }
+    }`
 
 ## Features
 
@@ -42,5 +69,5 @@ Project is still in progress cause it gives me a lot of fun 
 My inspiration was the old game which I played when I was 10 years old. https://www.c64-wiki.com/wiki/Batty 
 
 ## Contact
-Created by [@malgorzatakowalska](https://www.malgorzatakowalska.com/) - feel free to contact me!
+Created by [@malgorzatakowalska](https://www.malgorzatakowalska.com/) - feel free to contact me! 
 
