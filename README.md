@@ -15,9 +15,9 @@ A Simple game in which we have to smash a wall of bricks by deflecting a bouncin
 I wanted to create my first game which be very similar to the game I played in my childhood. I wanted to actually do whole graphic and make it „alive”.
 
 ## Screenshots
-<img src="/brick-breaker.gif" width="350"/>
+<img src="/brick-breaker.gif" width="600"/>
 <br>
-<img src="/brick-breaker2.gif" width="350"/>
+<img src="/brick-breaker2.gif" width="600"/>
 
 
 ## Technologies
@@ -74,9 +74,13 @@ public BrickSolid(int x, int y, Mediator mediator) {
 ```
 ## Features
 
+Features: 
 * Add New Levels (more complicated)
 * Add Few More Specials ( a shooter one )
 
+TODO:
+* Change ball speed to check collision with paddle
+* Check out switching levels 
 
 ## Status
 Project is still in progress cause it gives me a lot of fun 
