@@ -46,7 +46,8 @@ After these are all set up, you can follow the next few instructions to get a co
 
 ## Code Examples
 
-`private void chooseKeyboardOrMouse(int keyBoardSpeed, int mouseSpeed) {
+```
+private void chooseKeyboardOrMouse(int keyBoardSpeed, int mouseSpeed) {
         if (keyBoardSpeed > mouseSpeed) {
             speedX = keyBoardController.getHorizontalMovement();
         } else if (mouseSpeed > keyBoardSpeed) {
@@ -54,8 +55,23 @@ After these are all set up, you can follow the next few instructions to get a co
         }else {
             speedX = 0;
         }
-    }`
-
+    }
+```
+```
+public BrickSolid(int x, int y, Mediator mediator) {
+        super(x, y,Color.GRAY, mediator);
+        counter = 0;
+    }
+    @Override
+    public void reactToHit(GameObject object) {
+        if (counter >= 1) {
+            SoundEffect.BRICK_BREAKER.play();
+            brickDestroyed();
+        }
+        setColor(Color.BLUE);
+        counter++;
+    }
+```
 ## Features
 
 * Add New Levels (more complicated)
