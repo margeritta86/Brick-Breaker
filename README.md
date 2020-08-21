@@ -22,7 +22,8 @@ I wanted to create my first game which be very similar to the game I played in m
 
 ## Technologies
 
-Libraries I used in my Game: 
+Used Libraries: 
+
 * java.io.*
 * javax.swing.*
 * java.awt.*;
@@ -31,10 +32,9 @@ Libraries I used in my Game:
 * java.imageio.*;
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
 
 Installation would require the following components and configurations:
-* Maven
+
 * Github
 * Latest version of Java
 
