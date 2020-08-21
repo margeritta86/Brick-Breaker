@@ -1,4 +1,4 @@
-<div align="center">
+
         
 # Brick-Breaker
 A Simple game in which we have to smash a wall of bricks by deflecting a bouncing ball with a paddle. The paddle is moving horizontal and its controlled by mouse or by keyboard arrows.  
@@ -18,15 +18,15 @@ I wanted to create my first game which be very similar to the game I played in m
 
 ## Inspiration
 My inspiration was the old game which I played when I was 10 years old.
-![alt text](https://i.ytimg.com/vi/r2LNOD0aBcs/maxresdefault.jpg)
+<div align="center"> ![alt text](https://i.ytimg.com/vi/r2LNOD0aBcs/maxresdefault.jpg)</div>
 
  https://www.c64-wiki.com/wiki/Batty 
                                                                        
 
 ## Screenshots
-<img src="/brick-breaker.gif" width="600"/>
+<div align="center"><img src="/brick-breaker.gif" width="600"/>
 <br>
-<img src="/brick-breaker2.gif" width="600"/>
+<img src="/brick-breaker2.gif" width="600"/></div>
 
 
 ## Technologies
@@ -96,4 +96,4 @@ Project is still in progress cause it gives me a lot of fun 
 
 ## Contact
 Created by [@malgorzatakowalska](https://www.malgorzatakowalska.com/) - feel free to contact me! 
-</div>
+
