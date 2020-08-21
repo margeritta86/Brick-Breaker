@@ -18,15 +18,15 @@ I wanted to create my first game which be very similar to the game I played in m
 
 ## Inspiration
 My inspiration was the old game which I played when I was 10 years old.
-<div align="center"> ![alt text](https://i.ytimg.com/vi/r2LNOD0aBcs/maxresdefault.jpg)</div>
+![alt text](https://i.ytimg.com/vi/r2LNOD0aBcs/maxresdefault.jpg)
 
  https://www.c64-wiki.com/wiki/Batty 
                                                                        
 
 ## Screenshots
-<div align="center"><img src="/brick-breaker.gif" width="600"/>
+<img src="/brick-breaker.gif" width="600"/>
 <br>
-<img src="/brick-breaker2.gif" width="600"/></div>
+<img src="/brick-breaker3.gif" width="600"/>
 
 
 ## Technologies
