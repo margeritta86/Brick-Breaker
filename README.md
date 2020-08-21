@@ -18,7 +18,7 @@ I wanted to create my first game which be very similar to the game I played in m
 
 ## Inspiration
 My inspiration was the old game which I played when I was 10 years old.
-![alt text](https://i.ytimg.com/vi/r2LNOD0aBcs/maxresdefault.jpg)
+![alt text](https://xtremeretro.com/wp-content/uploads/2016/02/Batty-Elite-Commodore-64-ZX-Spectrum-Amstrad-CPC-Xtreme-Retro-2.png)
 
  https://www.c64-wiki.com/wiki/Batty 
                                                                        
