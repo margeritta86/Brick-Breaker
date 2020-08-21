@@ -18,7 +18,7 @@ public enum SoundEffect {
     private Clip clip;
 
 
-     SoundEffect(String soundFileName) {
+    SoundEffect(String soundFileName) {
         try {
             File file = new File(soundFileName);
             clip = AudioSystem.getClip();
@@ -27,7 +27,7 @@ public enum SoundEffect {
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
-     }
+    }
 
     public void play() {
         if (volume != Volume.MUTE) {
@@ -38,13 +38,13 @@ public enum SoundEffect {
         }
     }
 
-    public void playInLoop(){
-         clip.loop(Clip.LOOP_CONTINUOUSLY);
+    public void playInLoop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
 
     }
 
-    // Optional static method to pre-load all the sound files.
     static void init() {
-        values(); // calls the constructor for all the elements
+        values();
     }
+
 }

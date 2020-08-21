@@ -9,7 +9,7 @@ import java.util.Random;
 public class SpecialFactory {
 
     public final static int DEFAULT_TIME = 5;
-    private final static double SPAWN_CHANCE = 0.20;
+    private final static double SPAWN_CHANCE = 0.50;
     private Random random = new Random();
     private Mediator mediator;
 
@@ -36,7 +36,7 @@ public class SpecialFactory {
     }
 
     private Special drawSpecial(SpecialType type, int x, int y) {
-        type = SpecialType.LEVELUP;
+
 
         switch (type) {
             case WIDER_RAQUET:

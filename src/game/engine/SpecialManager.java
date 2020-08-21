@@ -55,7 +55,7 @@ public class SpecialManager implements ActionListener {
 
     public void executeRaquetCollision(Special special) {
         for (GameObject gameObject : gameplay.getObjects()) {
-            if (gameObject.getType() == Type.SPECIAL) { // jeśli sam ze sobą - pomiń
+            if (gameObject.getType() == Type.SPECIAL) {
                 continue;
             }
             if (gameObject.getType() == Type.RAQUET && gameObject.isIntersecting(special)) {
