@@ -24,9 +24,9 @@ My inspiration was the old game which I played when I was 10 years old.
                                                                        
 
 ## Screenshots
-<img src="/brick-breaker.gif" width="600"/>
+<img src="gifs/brick-breaker.gif" width="600"/>
 <br>
-<img src="/brick-breaker3.gif" width="600"/>
+<img src="gifs/brick-breaker3.gif" width="600"/>
 
 
 ## Technologies
