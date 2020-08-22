@@ -1,23 +1,32 @@
+
+        
 # Brick-Breaker
 A Simple game in which we have to smash a wall of bricks by deflecting a bouncing ball with a paddle. The paddle is moving horizontal and its controlled by mouse or by keyboard arrows.  
 
 ## Table of contents
 * [General info](#general-info)
+* [Inspiration](#inspiration)
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
 I wanted to create my first game which be very similar to the game I played in my childhood. I wanted to actually do whole graphic and make it „alive”.
 
+## Inspiration
+My inspiration was the old game which I played when I was 10 years old.
+![alt text](https://xtremeretro.com/wp-content/uploads/2016/02/Batty-Elite-Commodore-64-ZX-Spectrum-Amstrad-CPC-Xtreme-Retro-2.png)
+
+ https://www.c64-wiki.com/wiki/Batty 
+                                                                       
+
 ## Screenshots
-<img src="/brick-breaker.gif" width="350"/>
+<img src="/brick-breaker.gif" width="600"/>
 <br>
-<img src="/brick-breaker2.gif" width="350"/>
+<img src="/brick-breaker3.gif" width="600"/>
 
 
 ## Technologies
@@ -74,15 +83,16 @@ public BrickSolid(int x, int y, Mediator mediator) {
 ```
 ## Features
 
+Features: 
 * Add New Levels (more complicated)
 * Add Few More Specials ( a shooter one )
 
+TODO:
+* Change ball speed to check collision with paddle
+* Check out switching levels 
 
 ## Status
 Project is still in progress cause it gives me a lot of fun 
-
-## Inspiration
-My inspiration was the old game which I played when I was 10 years old. https://www.c64-wiki.com/wiki/Batty 
 
 ## Contact
 Created by [@malgorzatakowalska](https://www.malgorzatakowalska.com/) - feel free to contact me! 
