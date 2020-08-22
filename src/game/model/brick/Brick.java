@@ -10,7 +10,7 @@ import java.awt.*;
 
 public abstract class Brick extends GameObject {
 
-    public static final int DEFAULT_HEIGHT = GameView.HEIGHT / 32,
+    public static final int DEFAULT_HEIGHT = GameView.HEIGHT / 26,
                             DEFAULT_WIDTH = GameView.WIDTH / 20;
 
 
