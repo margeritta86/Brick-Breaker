@@ -44,14 +44,13 @@ Used Libraries:
 
 Installation would require the following components and configurations:
 
-* Github
-* Latest version of Java
+* JAva version 11
 
 After these are all set up, you can follow the next few instructions to get a copy of the application on your computer and test run the program:
 
 1. Download the whole repo
 2. Change the directory with the `cd` command into the *BrickBreaker* folder that is in the folder where the repo had been clone to
-3. Run the program with `java -jar target/odbijanie.jar`
+3. Run the program with 'Lanucher.java'
 
 ## Code Examples
 
